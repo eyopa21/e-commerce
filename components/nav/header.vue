@@ -1,12 +1,16 @@
 
 <script setup>
-const { showSideBar } = useLayout()
+const layout = useLayout()
 </script>
 <template>
     <header class="sticky top-0 z-40 bg-white shadow-sm shadow-light-500">
         <div class="container flex items-center justify-between py-4">
             <div class="flex items-center">
-                <Icon name="ion:menu-outline" size="26" class="mr-4 cursor-pointer" @click="showSideBar = !showSideBar" />
+                <span class="block md:hidden">
+
+                    <Icon name="ion:menu-outline" size="26" class=" mr-4 cursor-pointer"
+                        @click="layout.showSidebar = true" />
+                </span>
                 <h3 class="md:w-[160px]">LOGO</h3>
             </div>
             <nav class="items-center hidden gap-6 text-sm text-gray-500 lg:flex lg:px-4">
@@ -21,7 +25,7 @@ const { showSideBar } = useLayout()
 
             <div class="flex gap-4 justify-end items-center md:w-[160px] flex-1 ml-auto">
                 <ProductSearch class="hidden sm:inline-flex max-w-[320px] w-[60%]" />
-                <div class="relative cursor-pointer sm:hidden" title="Cart" @click="toggleSearch">
+                <div class="relative cursor-pointer sm:hidden" title="Cart" @click="layout.showSearch = !layout.showSearch">
                     <Icon name="ion:search-outline" size="20" class="mr-1 md:mr-0" />
                 </div>
                 <NuxtLink to="/wishlist" title="Wishlist">
@@ -34,7 +38,7 @@ const { showSideBar } = useLayout()
             </div>
         </div>
         <Transition name="scale-y" mode="out-in">
-            <div class="container mb-3 -mt-1 sm:hidden">
+            <div v-if="layout.showSearch" class="container mb-3 -mt-1 sm:hidden">
                 <ProductSearch class="flex w-full" />
             </div>
         </Transition>

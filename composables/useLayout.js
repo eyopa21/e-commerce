@@ -3,7 +3,8 @@ export default function() {
         return {
            
             showSidebar: false,
-           showCart: false
+            showCart: false,
+           showSearch: false
             
 
         }
