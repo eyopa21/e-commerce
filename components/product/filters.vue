@@ -1,5 +1,5 @@
 <script setup>
-
+const { removeBodyClass } = useHelpers()
 </script>
 
 <template>
@@ -15,7 +15,7 @@
             </div>
             <ProductFiltersOnSale />
             <LazyProductFiltersRating />
-            <LazyResetFiltersButton v-if="isFiltersActive" />
+            <LazyProductFiltersResetFilterButton />
         </div>
     </aside>
     <div class="fixed inset-0 z-50 hidden bg-black opacity-25 filter-overlay" @click="removeBodyClass('show-filters')">
