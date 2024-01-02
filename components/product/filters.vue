@@ -3,22 +3,19 @@
 </script>
 
 <template>
-    <aside id="filters">
-        <h1 class="text-4xl">products</h1>
+    <aside id="filters" class="pl-4">
+
         <ProductFiltersOrderByDropdown class="block w-full md:hidden" />
         <div class="relative z-30 grid mb-12 space-y-8 divide-y">
             <ProductFiltersPrice />
-            <!--CategoryFilter v-if="!hideCategories" />
-            <div v-for="attribute in globalProductAttributes" :key="attribute.slug">
-                <ColorFilter v-if="attribute.slug == 'pa_color' || attribute.slug == 'pa_colour'"
-                    :filter-slug="attribute.slug" :label="attribute.label" :open="attribute.openByDefault"
-                    :show-count="attribute.showCount" :hide-empty="attribute.hideEmpty" />
-                <GlobalFilter v-else :filter-slug="attribute.slug" :label="attribute.label" :open="attribute.openByDefault"
-                    :show-count="attribute.showCount" :hide-empty="attribute.hideEmpty" />
+            <ProductFiltersCategory />
+            <div>
+                <ProductFiltersColor />
+
             </div>
-            <OnSaleFilter />
-            <LazyStarRatingFilter />
-            <LazyResetFiltersButton v-if="isFiltersActive" /-->
+            <ProductFiltersOnSale />
+            <LazyProductFiltersRating />
+            <LazyResetFiltersButton v-if="isFiltersActive" />
         </div>
     </aside>
     <div class="fixed inset-0 z-50 hidden bg-black opacity-25 filter-overlay" @click="removeBodyClass('show-filters')">

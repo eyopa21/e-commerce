@@ -41,10 +41,6 @@ export default defineNuxtConfig({
           rel: 'icon',
           type: 'image/png',
           href: '/favicon.png'
-        },
-        {
-          rel: 'stylesheet',
-          href: '/assets/theme-c.css'
         }
 
       ],
