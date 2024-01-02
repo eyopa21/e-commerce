@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col min-h-screen px-2">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
