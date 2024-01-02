@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps({
+const props = defineProps({
   firstImage: { type: String, required: true },
   mainImage: { type: String, required: true },
   gallery: { type: Object, required: true },
@@ -11,24 +11,23 @@ const imageToShow = ref<number | null>(0);
 const changeImage = (index: number | null): void => {
   imageToShow.value = index;
 };
+
+console.log(props.gallery)
 </script>
 
 <template>
   <div>
     <VueSaleBadge :node="node" class="absolute text-base top-4 right-4" />
-    <NuxtImg v-show="imageToShow === null" class="rounded-xl object-contain w-full min-w-[350px]" width="700" height="700"
-      fit="outside" format="webp" :src="firstImage" :alt="node.name" :title="node.name" fetchpriority="high" />
+
     <NuxtImg v-show="imageToShow === 0" class="rounded-xl object-contain w-full min-w-[350px]" width="700" height="700"
       fit="outside" format="webp" :src="mainImage" :alt="node.name" :title="node.name" fetchpriority="high" />
-    <NuxtImg v-for="(galleryImg, i) in gallery" v-show="imageToShow === i + 1" :key="i"
+    <NuxtImg v-for="(galleryImg, i) in props.gallery" v-show="imageToShow === i + 1" :key="i"
       class="rounded-xl object-contain w-full min-w-[350px]" width="700" height="700" fit="outside" format="webp"
-      :alt="galleryImg.altText || galleryImg.title || node.name" :title="galleryImg.title || node.name"
-      :src="galleryImg || '/images/placeholder.jpg'" />
+      alt="the image" title="title" :src="galleryImg" />
     <div class="my-4 gallery-images">
-      <NuxtImg class="cursor-pointer rounded-xl" width="110" height="140" format="webp" :src="firstImage"
-        @click.native="changeImage(null)" :alt="node.name" :title="node.name" />
-      <NuxtImg v-for="(galleryImg, i) in gallery.nodes" :key="i" class="cursor-pointer rounded-xl" width="110"
-        height="140" fit="outside" format="webp" :src="galleryImg.sourceUrl"
+
+      <NuxtImg v-for="(galleryImg, i) in props.gallery" :key="i" class="cursor-pointer rounded-xl" width="110"
+        height="140" fit="outside" format="webp" :src="galleryImg"
         :alt="galleryImg.altText || galleryImg.title || node.name" :title="galleryImg.title || node.name"
         @click.native="changeImage(i + 1)" />
     </div>
