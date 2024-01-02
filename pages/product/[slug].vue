@@ -17,7 +17,8 @@ const theProduct = ref({
 
     <div class="flex flex-col gap-10 md:flex-row md:justify-between lg:gap-24">
       <ProductImageGallery class="relative flex-1" :first-image="theProduct.images[0]"
-        :main-image="theProduct.images[1] || '/images/placeholder.jpg'" :gallery="theProduct.images" :node="theProduct" />
+        :main-image="theProduct.images[1] || '/images/placeholder.jpg'" :gallery="theProduct.images"
+        :node="theProduct.images" />
       <!--NuxtImg v-else class="relative flex-1" src="/images/placeholder.jpg" :alt="product?.name || 'Product'" /-->
 
       <div class="lg:max-w-md xl:max-w-lg md:py-2">

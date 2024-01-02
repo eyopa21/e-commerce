@@ -20,10 +20,10 @@ const changeImage = (index: number | null): void => {
       fit="outside" format="webp" :src="firstImage" :alt="node.name" :title="node.name" fetchpriority="high" />
     <NuxtImg v-show="imageToShow === 0" class="rounded-xl object-contain w-full min-w-[350px]" width="700" height="700"
       fit="outside" format="webp" :src="mainImage" :alt="node.name" :title="node.name" fetchpriority="high" />
-    <NuxtImg v-for="(galleryImg, i) in gallery.nodes" v-show="imageToShow === i + 1" :key="i"
+    <NuxtImg v-for="(galleryImg, i) in gallery" v-show="imageToShow === i + 1" :key="i"
       class="rounded-xl object-contain w-full min-w-[350px]" width="700" height="700" fit="outside" format="webp"
       :alt="galleryImg.altText || galleryImg.title || node.name" :title="galleryImg.title || node.name"
-      :src="galleryImg.sourceUrl || '/images/placeholder.jpg'" />
+      :src="galleryImg || '/images/placeholder.jpg'" />
     <div class="my-4 gallery-images">
       <NuxtImg class="cursor-pointer rounded-xl" width="110" height="140" format="webp" :src="firstImage"
         @click.native="changeImage(null)" :alt="node.name" :title="node.name" />
