@@ -41,7 +41,7 @@ useHead({
 </script>
 
 <template>
-  <main class="container">
+  <main class="container px-2">
     <div class="grid grid-cols-2 gap-4 my-6 md:grid-cols-3 lg:gap-8 xl:grid-cols-4">
       <ProductCategoryCard v-for="(category, i) in categories" :key="i" class="w-full" :node="category" />
     </div>

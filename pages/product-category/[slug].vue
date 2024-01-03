@@ -1,23 +1,10 @@
 <script setup>
-const { setProducts, updateProductList } = useProducts();
-const { isQueryEmpty } = useHelpers();
-const route = useRoute();
-const slug = route.params.slug;
+const { removeBodyClass, toggleBodyClass } = useHelpers();
+const layout = useLayout();
 
-const { data } = await useAsyncGql('getProducts', { slug });
-setProducts(data.value?.products?.nodes || []);
-
-onMounted(() => {
-  if (!isQueryEmpty.value) updateProductList();
+onBeforeUnmount(() => {
+  removeBodyClass('show-filters');
 });
-
-watch(
-  () => route.query,
-  () => {
-    if (route.name !== 'product-category-slug') return;
-    updateProductList();
-  },
-);
 
 useHead({
   title: 'Products',
@@ -27,16 +14,28 @@ useHead({
 
 <template>
   <div class="container flex items-start gap-16">
-    <Filters :hide-categories="true" />
+    <ProductFilters />
 
     <div class="w-full">
       <div class="flex items-center justify-between w-full gap-4 mt-8 md:gap-8">
         <ProductResultCount />
-        <OrderByDropdown class="hidden md:inline-flex" />
-        <ShowFilterTrigger class="md:hidden" />
+        <ProductFiltersOrderByDropdown class="hidden md:inline-flex" />
+
+        <div class="md:hidden">
+
+          <div class="relative inline-flex -space-x-px shadow-sm rounded-m isolate">
+            <button
+              class="relative inline-flex items-center p-2 text-sm text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:z-20"
+              aria-label="Show filters" @click="toggleBodyClass('show-filters')" title="Show filters">
+              <Icon name="ion:funnel-outline" size="18" class="transition-transform transform transform-origin-center" />
+            </button>
+            <span class="absolute z-20 w-2.5 h-2.5 rounded-full bg-primary -top-1 -right-1" />
+          </div>
+
+        </div>
       </div>
       <ProductGrid />
-      <LazyNoProductsFound />
     </div>
   </div>
+  <!--NoProductsFound>Could not fecth products from your store. Please check your configuration.</!--NoProductsFound-->
 </template>
