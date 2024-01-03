@@ -78,7 +78,7 @@ const theProduct = ref({
         </div>
         <hr />
         <div class="flex flex-wrap gap-4">
-          <VueButtonWishlistButton />
+          <VueButtonWishlistButton :product="theProduct" />
           <VueButtonShareButton :product="theProduct" />
         </div>
       </div>
