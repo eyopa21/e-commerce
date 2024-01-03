@@ -20,7 +20,7 @@ const layout = useLayout()
                 <NuxtLink to="/contact">Contact</NuxtLink>
 
                 <NuxtLink class="lg:hidden" to="/wishlist" :prefetch="false">Wishlist</NuxtLink>
-                <NuxtLink class="lg:hidden" to="/my-account" :prefetch="false">My Account</NuxtLink>
+                <NuxtLink class="lg:hidden" to="/auth/login" :prefetch="false">My Account</NuxtLink>
             </nav>
 
             <div class="flex gap-4 justify-end items-center md:w-[160px] flex-1 ml-auto">

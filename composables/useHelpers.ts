@@ -19,13 +19,19 @@ export function useHelpers() {
     body?.classList.contains(className) ? body.classList.remove(className) : body?.classList.add(className);
   }
 
-
+  const formatDate = (date: string): string => {
+    return new Date(date).toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+  };
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return {
-
+    formatDate,
     addBodyClass,
     removeBodyClass,
     toggleBodyClass,
