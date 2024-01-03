@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup >
 const props = defineProps({
   firstImage: { type: String, required: true },
   mainImage: { type: String, required: true },
@@ -6,9 +6,9 @@ const props = defineProps({
   node: { type: Object, required: true },
 });
 
-const imageToShow = ref<number | null>(0);
+const imageToShow = ref(0);
 
-const changeImage = (index: number | null): void => {
+const changeImage = (index) => {
   imageToShow.value = index;
 };
 
@@ -22,7 +22,7 @@ console.log(props.gallery)
     <NuxtImg v-show="imageToShow === 0" class="rounded-xl object-contain w-full min-w-[350px]" width="700" height="700"
       fit="outside" format="webp" :src="mainImage" :alt="node.name" :title="node.name" fetchpriority="high" />
     <NuxtImg v-for="(galleryImg, i) in props.gallery" v-show="imageToShow === i + 1" :key="i"
-      class="rounded-xl object-contain w-full min-w-[350px]" width="700" height="700" fit="outside" format="webp"
+      class="rounded-xl object-contain w-full min-w-[350px] " width="700" height="700" fit="outside" format="webp"
       alt="the image" title="title" :src="galleryImg" />
     <div class="my-4 gallery-images">
 
