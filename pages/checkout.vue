@@ -54,7 +54,7 @@
           </Transition>
 
           <!-- Shipping methods -->
-          <!--div v-if="cart.availableShippingMethods.length">
+          <!--div-- v-if="cart.availableShippingMethods.length">
             <h3 class="mb-4 text-xl font-semibold">shippingSelect</h3>
             <ShippingOptions :options="cart.availableShippingMethods[0].rates"
               :active-option="cart.chosenShippingMethods[0]" />
