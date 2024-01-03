@@ -6,7 +6,7 @@ const { formatDate, scrollToTop } = useHelpers();
 
 
 const refresh = () => {
-  orders.value = null;
+  // orders.value = null;
   scrollToTop();
 
 };
@@ -15,12 +15,12 @@ const goToOrder = (orderNumber) => {
   router.push(`/order-summary/${orderNumber}`);
 };
 
-const orders = ref({
+const orders = reactive([{
   orderNumber: 11234,
   date: '11/2/33',
   status: 'PENDING',
   total: 345
-})
+}])
 </script>
 
 <template>
@@ -38,13 +38,13 @@ const orders = ref({
         <tbody>
 
           <tr v-for="(order, key) in orders" :key="key" class="cursor-pointer hover:underline">
-            {{ order }}
+
             <td class="rounded-l-lg">
               {{ order.orderNumber }}
             </td>
-            <td>{{ order.date }}</td>
+            <td>{{ formatDate(order.date) }}</td>
             <td>
-              {{ order.status }}
+              <OrderStatusLabel :status="order.status" />
             </td>
             <td class="text-right rounded-r-lg">
               {{ order.total }}
