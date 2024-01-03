@@ -4,11 +4,9 @@ const { addToWishlist, removeFromWishlist, isInList } = useWishlist();
 const props = defineProps(['product'])
 
 
+const isWishlisted = computed(() => (props.product.id ? isInList(props.product.id) : false));
 
-const toggleWishlist = () => {
-
-  addToWishlist(props.product);
-}
+const toggleWishlist = () => (isWishlisted.value ? removeFromWishlist(props.product.id) : addToWishlist(props.product));
 
 
 
@@ -16,8 +14,9 @@ const toggleWishlist = () => {
 
 <template>
   <button type="button" class="cursor-pointer flex mt-4 text-sm text-gray-400 gap-2 items-center" @click="toggleWishlist">
-    <Icon name="ion:heart" size="18" class="text-red-400" />
 
-    <span>hello</span>
+    <Icon v-if="isWishlisted" name="ion:heart" size="18" class="text-red-400" />
+    <Icon v-else name="ion:heart-outline" size="18" />
+    <span>{{ isWishlisted ? 'Remove form wishlist' : 'Add to wishlist' }}</span>
   </button>
 </template>

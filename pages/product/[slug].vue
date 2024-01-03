@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 
 const theProduct = ref({
+  id: '1',
   images: ['/hero-3.jpg', '/placeholder.jpg', '/hero-3.jpg', '/placeholder.jpg'],
   title: 'Yellow boots',
   subtitle: 'subtitle',

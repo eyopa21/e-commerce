@@ -27,14 +27,18 @@ export function useWishlist() {
    * @param {number} databaseId
    * @example removeFromWishlist(123) - Removes the product with the databaseId of 123
    */
-  function removeFromWishlist(databaseId: number): void {
-    theList.value = theList.value.filter((item) => item.databaseId !== databaseId);
+  function removeFromWishlist(productId: number): void {
+    theList.value = theList.value.filter((item) => {
+
+      console.log("the titehehehhe", item)
+      item.id !== productId
+    });
     localStorage.setItem('wishlist', JSON.stringify(theList.value));
   }
 
   // Check if an item is in the list
-  function isInList(databaseId?: number): boolean {
-    return databaseId ? theList.value.some((item) => item.databaseId === databaseId) : false;
+  function isInList(productId?: number): boolean {
+    return productId ? theList.value.some((item) => item.id === productId) : false;
   }
 
   // Check if the list is empty
