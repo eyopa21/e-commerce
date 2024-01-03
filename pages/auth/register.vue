@@ -1,64 +1,54 @@
 
 <script setup>
-import { LoginValidationSchema } from '../../zod/LoginSchema'
+import { RegsiterValidationSchema } from '../../zod/RegisterSchema'
 const formView = ref('login');
 const message = ref('');
 const errorMessage = ref('');
-const loginState = reactive({
+const RegisterState = reactive({
+    username: '',
     email: '',
     password: ''
 })
-const login = async () => {
-    console.log("login")
-};
 
-const handleFormSubmit = async () => {
+const register = async () => {
     console.log("Register")
 };
 
-const resetPassword = async () => {
-    console.log('reset password')
-};
-
-const buttonText = computed(() => {
-    if (formView.value === 'login') {
-        return 'Login'
-    } else if (formView.value === 'register') {
-        return 'Register'
-    } else if (formView.value === 'forgotPassword') {
-        return 'ResetPassword'
-    }
-    return 'login';
-});
 </script>
 
 
 <template>
-    <div class="max-w-lg mx-auto my-16 min-h-[600px]">
+    <div class="max-w-lg mx-auto my-16 min-h-[600px] lg:my-24">
         <div class="flex flex-col items-center">
-            <h1 class="mb-6 scale-125 text-4xl">LOGO</h1>
-            <h1 class="text-xl font-semibold lg:text-3xl">Login To account</h1>
+            <Logo class="mb-6 scale-125" />
+            <h1 class="text-xl font-semibold lg:text-3xl">Welcome to our platform</h1>
+
             <div class="my-2 text-center">
-                No account?
-                <NuxtLink to="/auth/register"
-                    class="font-semibold cursor-pointer text-primary underline underline-offset-2">
-                    Register here...</NuxtLink>.
+                Has account?
+                <a class="font-semibold cursor-pointer text-primary" @click="formView = 'login'">
+                    Please login </a>.
             </div>
 
-
         </div>
-        <UForm :schema="LoginValidationSchema" :state="loginState" class="mt-6">
-
-
+        <UForm :schema="RegsiterValidationSchema" :state="RegisterState" class="mt-6">
             <div>
+                <UFormGroup name="username">
+
+                    <label for="username"> Username
+                        <span class="text-red-500">* </span> <br />
+                        <input v-model="RegisterState.username" id="username" placeholder="Username" type="text" />
+                    </label>
+                </UFormGroup>
+
                 <UFormGroup name="email">
                     <label for="email"> Email <span class="text-red-500">*</span> <br />
                     </label>
-                    <input v-model="loginState.email" id="email" placeholder="Email" type="email" />
+                    <input v-model="RegisterState.email" id="email" placeholder="abebe@gmail.com" type="email" />
                 </UFormGroup>
                 <UFormGroup name="password">
+
                     <label for="password">Password <span class="text-red-500">*</span> <br />
-                        <VuePasswordInput v-model="loginState.password" id="password" class="mb-4"
+                        <VuePasswordInput v-model="RegisterState.password" id="password" class="mb-4"
                             className="border rounded-lg w-full p-3 px-4 bg-white" placeholder="Password" />
                     </label>
                 </UFormGroup>
@@ -73,7 +63,7 @@ const buttonText = computed(() => {
             </Transition>
             <button class="flex items-center justify-center gap-4 mt-4 text-lg">
                 <LoadingIcon v-if="isPending" stroke="4" size="16" color="#fff" />
-                <span>Login</span>
+                <span>Register</span>
             </button>
         </UForm>
         <NuxtLink to="/auth/forgot"
@@ -87,7 +77,7 @@ const buttonText = computed(() => {
 <style lang="postcss" scoped>
 input,
 button {
-    @apply border rounded-lg mb-4 w-full p-3 px-4 bg-white focus:ring-red-500;
+    @apply border rounded-lg mb-4 w-full p-3 px-4 bg-white;
 }
 
 form button {

@@ -11,3 +11,8 @@
   </div>
 </template>
 
+<style>
+h1 {
+  @apply text-primary
+}
+</style>
