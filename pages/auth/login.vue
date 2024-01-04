@@ -1,6 +1,18 @@
 
 <script setup>
 import { LoginValidationSchema } from '../../zod/LoginSchema'
+import login_query from '../queries/auth/login.gql'
+const { onLogin, onLogout, getToken } = useApollo()
+const { mutate: Login, onDone, onError, loading } = useMutation(login_query)
+const { testAuth } = useAuth()
+
+const UID = useCookie('uid');
+const ROLE = useCookie('ROLE');
+const TOKEN = useCookie('token', {
+    secure: true,
+    httpOnly: true
+});
+
 const formView = ref('login');
 const message = ref('');
 const errorMessage = ref('');
@@ -8,17 +20,29 @@ const loginState = reactive({
     email: '',
     password: ''
 })
+onMounted(async () => {
+    const { tok } = await testAuth()
+
+    console.log("tokichaw", tok)
+})
+
+
+
 const login = async () => {
     console.log("login")
+    Login({ email: loginState.email, password: loginState.password })
+    onDone(async res => {
+        console.log(res)
+        await onLogin(res.data.Login.token)
+        UID.value = res.data.Login.id
+
+    })
+    onError(err => {
+        console.log(err)
+    })
 };
 
-const handleFormSubmit = async () => {
-    console.log("Register")
-};
 
-const resetPassword = async () => {
-    console.log('reset password')
-};
 
 const buttonText = computed(() => {
     if (formView.value === 'login') {
@@ -47,7 +71,7 @@ const buttonText = computed(() => {
 
 
         </div>
-        <UForm :schema="LoginValidationSchema" :state="loginState" class="mt-6">
+        <UForm :schema="LoginValidationSchema" :state="loginState" class="mt-6" @submit="login()">
 
 
             <div>
@@ -71,8 +95,8 @@ const buttonText = computed(() => {
             <Transition name="scale-y" mode="out-in">
                 <div v-if="errorMessage" class="my-4 text-sm text-red-500">{{ errorMessage }}</div>
             </Transition>
-            <button class="flex items-center justify-center gap-4 mt-4 text-lg">
-                <LoadingIcon v-if="isPending" stroke="4" size="16" color="#fff" />
+            <button type="submit" class="flex items-center justify-center gap-4 mt-4 text-lg">
+                <VueLoadingIcon v-if="loading" stroke="4" size="16" color="#fff" />
                 <span>Login</span>
             </button>
         </UForm>

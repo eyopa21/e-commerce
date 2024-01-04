@@ -19,7 +19,7 @@ export default defineNuxtConfig({
   apollo: {
     clients: {
       default: {
-        httpEndpoint: 'https://mainportfolio.hasura.app/v1/graphql',
+        httpEndpoint: 'https://nuxt-commerce.hasura.app/v1/graphql',
       }
     },
   },
