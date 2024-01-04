@@ -1,0 +1,43 @@
+query myQuery($id: uuid!){
+  users_by_pk(id: $id) {
+    id
+    user_name
+    first_name
+    last_name
+    email
+    is_verified
+    phone_number
+    created_at
+    updated_at
+    billing_and_shipping_addresses {
+      id
+      country
+      city
+      company_name
+      sub_city
+      kebele
+      zip_code
+      address1
+      address2
+      created_at
+      updated_at
+    }
+    carts {
+      id
+      created_at
+      updated_at
+      product {
+        id
+        seller_id
+        title
+        subtitle
+        price
+        description
+        categories
+        amount_in_stock
+        created_at
+        updated_at
+      }
+    }
+  }
+}

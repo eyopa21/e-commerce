@@ -4,8 +4,8 @@ import { LoginValidationSchema } from '../../zod/LoginSchema'
 import login_query from '../queries/auth/login.gql'
 const { onLogin, onLogout, getToken } = useApollo()
 const { mutate: Login, onDone, onError, loading } = useMutation(login_query)
-const { testAuth } = useAuth()
-
+const { myAuth } = useAuth()
+const router = useRouter()
 const UID = useCookie('uid');
 const ROLE = useCookie('ROLE');
 const TOKEN = useCookie('token', {
@@ -20,11 +20,7 @@ const loginState = reactive({
     email: '',
     password: ''
 })
-onMounted(async () => {
-    const { tok } = await testAuth()
 
-    console.log("tokichaw", tok)
-})
 
 
 
@@ -34,7 +30,12 @@ const login = async () => {
     onDone(async res => {
         console.log(res)
         await onLogin(res.data.Login.token)
-        UID.value = res.data.Login.id
+        try {
+            const res = await myAuth()
+            console.log("tokichaw", res)
+        } catch (err) {
+            console.log(err, "err")
+        }
 
     })
     onError(err => {
