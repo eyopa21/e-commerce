@@ -25,8 +25,9 @@ const register = async () => {
 
             <div class="my-2 text-center">
                 Has account?
-                <a class="font-semibold cursor-pointer text-primary" @click="formView = 'login'">
-                    Please login </a>.
+                <NuxtLink to="/auth/login"
+                    class="font-semibold cursor-pointer text-primary hover:underline underline-offset-2">
+                    Please login </NuxtLink>
             </div>
 
         </div>

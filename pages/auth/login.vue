@@ -66,8 +66,8 @@ const buttonText = computed(() => {
             <div class="my-2 text-center">
                 No account?
                 <NuxtLink to="/auth/register"
-                    class="font-semibold cursor-pointer text-primary underline underline-offset-2">
-                    Register here...</NuxtLink>.
+                    class="font-semibold cursor-pointer text-primary hover:underline underline-offset-2">
+                    Register here</NuxtLink>.
             </div>
 
 

@@ -5,7 +5,7 @@ const props = defineProps(['product'])
 
 <template>
     <div class="relative product-card">
-        <NuxtLink :to="`/product/`" :title="props.product.name">
+        <NuxtLink :to="`/product/1`" :title="props.product.name">
             <VueSaleBadge :node="node" class="absolute top-2 right-2" />
             <!--img v-if="colorVariableImage" :src="colorVariableImage" :alt="node.image?.altText || node.name"
                 :title="node.image?.title || node.name" :loading="index <= 3 ? 'eager' : 'lazy'" /-->

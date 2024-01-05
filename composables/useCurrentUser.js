@@ -2,7 +2,7 @@ export default function () {
   return useState("data", () => {
     return {
       
-      isVerified: false,
+      isVerified: null,
       id: null,
       currentUser: null
     };

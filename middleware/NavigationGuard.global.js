@@ -19,6 +19,12 @@ export default defineNuxtRouteMiddleware((to, from) => {
 
         return navigateTo("/auth/verify");
     }
+    if ((  to.name === 'auth-verify') & (is_verified.value === null)) {
+        return navigateTo('/auth/login')
+    }
+    if ((  to.name === 'auth-verify') & (is_verified.value)) {
+        return navigateTo('/')
+    }
     
     /*
     if (from.name === 'auth-verify' && !is_verified.value) {
