@@ -1,0 +1,43 @@
+mutation (
+  $user_id: uuid!
+  $first_name: String!
+  $last_name: String!
+  $user_name: String!
+  $address1: String!
+  $address2: String!
+  $city: String!
+  $company_name: String!
+  $country: String!
+  $kebele: String!
+  $sub_city: String!
+  $zip_code: Int!
+) {
+  update_billing_and_shipping_addresses(
+    where: { user_id: { _eq: "" } }
+    _set: {
+      address1: $address1
+      address2: $address2
+      city: $city
+      company_name: $company_name
+      country: $country
+      kebele: $kebele
+      sub_city: $sub_city
+      zip_code: $zip_code
+    }
+  ) {
+    returning {
+      id
+    }
+  }
+  update_users_by_pk(
+    pk_columns: { id: $user_id }
+    _set: {
+      first_name: $first_name
+      last_name: $last_name
+      phone_number: $phone_number
+      user_name: $user_name
+    }
+  ) {
+    id
+  }
+}

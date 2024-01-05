@@ -1,6 +1,10 @@
+<script setup>
+const currentUser = useCurrentUser()
+</script>
+
 <template>
   <div class="grid gap-8 account-form">
-    <AccountPersonalInfo />
+    <AccountPersonalInfo v-if="currentUser.currentUser" />
     <AccountBillingAndShipping />
     <AccountChangePassword />
   </div>

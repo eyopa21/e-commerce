@@ -1,0 +1,20 @@
+mutation (
+  $user_id: uuid!
+  $first_name: String!
+  $last_name: String!
+  $user_name: String!
+ $phone_number: String!
+) {
+ 
+  update_users_by_pk(
+    pk_columns: { id: $user_id }
+    _set: {
+      first_name: $first_name
+      last_name: $last_name
+      phone_number: $phone_number
+      user_name: $user_name
+    }
+  ) {
+    id
+  }
+}
