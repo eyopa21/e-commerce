@@ -38,7 +38,7 @@ export const useAuth = () => {
       const { clearAllCookies } = useHelpers();
       isPending.value = true;
       try {
-        const { logout } = await GqlLogout();
+        const { logout } = await onLogout();
         if (logout) {
           isPending.value = false;
           await refreshCart();

@@ -7,7 +7,6 @@ export function useWishlist() {
 
   const theList = useState<Product[]>('wishlist', () => []);
   if (process.client) {
-
     getFromLocalStorage()
   }
   console.log("the list", theList.value)

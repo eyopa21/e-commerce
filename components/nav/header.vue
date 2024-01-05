@@ -1,6 +1,7 @@
 
 <script setup>
 const layout = useLayout()
+const route = useRoute()
 </script>
 <template>
     <header class="sticky top-0 z-40 bg-white shadow-sm shadow-light-500 -ml-2">
@@ -18,9 +19,11 @@ const layout = useLayout()
             </div>
             <nav class="items-center hidden gap-6 text-sm text-gray-500 lg:flex lg:px-4">
                 <NuxtLink to="/" class="hover:border-b-2 border-primary" active-class="text-primary">Home</NuxtLink>
-                <NuxtLink to="/products" class="hover:border-b-2 border-primary" active-class="text-primary">Products
+                <NuxtLink to="/products" :class="{ 'text-primary': route.name === 'product-slug' }"
+                    class="hover:border-b-2 border-primary" active-class="text-primary">Products
                 </NuxtLink>
-                <NuxtLink to="/categories" class="hover:border-b-2 border-primary" active-class="text-primary">Categories
+                <NuxtLink to="/categories" :class="{ 'text-primary': route.name.includes('category') }"
+                    class="hover:border-b-2 border-primary" active-class="text-primary">Categories
                 </NuxtLink>
                 <NuxtLink to="/contact" class="hover:border-b-2 border-primary" active-class="text-primary">Contact
                 </NuxtLink>
@@ -41,8 +44,8 @@ const layout = useLayout()
                     active-class="text-primary">
                     <Icon name="ion:heart-outline" size="20" />
                 </NuxtLink>
-                <NuxtLink to="/my-account" title="Account" class="hover:border-b-2 border-primary"
-                    active-class="text-primary">
+                <NuxtLink to="/my-account" title="Account" :class="{ 'text-primary': route.name.includes('auth') }"
+                    class="hover:border-b-2 border-primary" active-class="text-primary">
                     <Icon name="ion:person-outline" size="20" />
                 </NuxtLink>
                 <CartToggleCart class="hover:border-b-2 border-primary" />

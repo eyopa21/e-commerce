@@ -15,7 +15,7 @@ const props = defineProps(['product'])
         </NuxtLink>
         <div class="p-2">
             <VueStarRating :rating="5" :count="2" />
-            <NuxtLink :to="`/product/`" :title="props.product.name">
+            <NuxtLink :to="`/product/1`" :title="props.product.name">
                 <h2 class="mb-2 font-light leading-tight">{{ props.product.name }}</h2>
             </NuxtLink>
 

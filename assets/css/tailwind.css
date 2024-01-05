@@ -39,9 +39,21 @@ select {
     transform: translateX(500px);
 }
 
+
 .slide-from-left-enter-from,
 .slide-from-left-leave-to {
     transform: translateX(-500px);
+}
+
+.drop-down-enter-from,
+.drop-down-leave-to {
+    @apply opacity-0 translate-y-[-20px]
+}
+
+
+.drop-down-leave-active,
+.drop-down-enter-active {
+    @apply transition-all duration-300
 }
 
 /* Fade */

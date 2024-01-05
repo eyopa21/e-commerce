@@ -1,4 +1,18 @@
-
+<script>
+const items = [
+    [{
+        label: 'Profile',
+        avatar: {
+            src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+        }
+    }, {
+        label: 'Profile',
+        avatar: {
+            src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+        }
+    }]
+]
+</script>
 <template>
     <footer class="bg-white p-2">
         <div class="container flex flex-wrap justify-between gap-12 my-24 md:gap-24">
@@ -10,6 +24,7 @@
                     to display your own information just like the one you're reading now.
                 </p>
                 <VueLangSwitcher class="mt-8" />
+
             </div>
             <div class="w-3/7 lg:w-auto">
                 <div class="mb-1 font-semibold">Information</div>
