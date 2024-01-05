@@ -1,8 +1,6 @@
 mutation (
   $user_id: uuid!
-  $first_name: String!
-  $last_name: String!
-  $user_name: String!
+ 
   $address1: String!
   $address2: String!
   $city: String!
@@ -13,7 +11,7 @@ mutation (
   $zip_code: Int!
 ) {
   update_billing_and_shipping_addresses(
-    where: { user_id: { _eq: "" } }
+    where: { user_id: { _eq: $user_id } }
     _set: {
       address1: $address1
       address2: $address2
@@ -29,15 +27,5 @@ mutation (
       id
     }
   }
-  update_users_by_pk(
-    pk_columns: { id: $user_id }
-    _set: {
-      first_name: $first_name
-      last_name: $last_name
-      phone_number: $phone_number
-      user_name: $user_name
-    }
-  ) {
-    id
-  }
+  
 }

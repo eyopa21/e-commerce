@@ -26,6 +26,7 @@ query myQuery($id: uuid!){
       id
       created_at
       updated_at
+      quantity
       product {
         id
         seller_id
@@ -33,6 +34,7 @@ query myQuery($id: uuid!){
         subtitle
         price
         description
+        images
         categories
         amount_in_stock
         created_at

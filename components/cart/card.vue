@@ -1,5 +1,5 @@
 <script setup>
-
+const { altImage } = useHelpers()
 const props = defineProps(['item'])
 
 console.log(props.item)
@@ -10,24 +10,24 @@ const quantity = ref(0)
 <template>
     <SwipeCard @remove="removeItem">
         <li class="flex items-center gap-3">
-            <NuxtLink to="/productSlug">
+            <NuxtLink :to="`/product/${props.item.product.id}`">
 
-                <NuxtImg provider="cloudinary" src="/v1699086989/hxhsmc9ihoavcpogkyxw.jpg" width="64" height="64"
-                    class="w-16 h-16 rounded-md" alt="alt" title="productType.image?.title || productType.name"
-                    loading="lazy" />
+                <NuxtImg provider="cloudinary" :src="props.item.product.images[0]?.split('upload')[1] || altImage"
+                    width="64" height="64" class="w-16 h-16 rounded-md" alt="alt"
+                    title="productType.image?.title || productType.name" loading="lazy" />
             </NuxtLink>
             <div class="flex-1">
-                <NuxtLink class="leading-tight" to="/productSlug"> {{ props.item.name }}</NuxtLink>
+                <NuxtLink class="leading-tight" to="/productSlug"> {{ props.item.product.title }}</NuxtLink>
                 <div class="mt-1 text-xs">
                     <div class="flex">
 
-                        <span class="font-semibold ml-2">{{ props.item.price }}</span>
+                        <span class="font-semibold ml-2">{{ props.item.product.price }}$</span>
                     </div>
                 </div>
 
 
             </div>
-            <input v-model.number="quantity" type="number" min="0" aria-label="Quantity"
+            <input v-model.number="props.item.quantity" type="number" min="0" aria-label="Quantity"
                 class="flex items-center justify-center w-16 gap-4 p-2 text-left bg-white border rounded-md focus:outline-none"
                 :disabled="isUpdatingCart" @input="updateQuantity" />
             <button title="Remove Item" aria-label="Remove Item" @click="removeItem" type="button">

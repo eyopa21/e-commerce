@@ -3,8 +3,8 @@ const currentUser = useCurrentUser()
 </script>
 
 <template>
-  <div class="grid gap-8 account-form">
-    <AccountPersonalInfo v-if="currentUser.currentUser" />
+  <div v-if="currentUser.currentUser" class="grid gap-8 account-form">
+    <AccountPersonalInfo />
     <AccountBillingAndShipping />
     <AccountChangePassword />
   </div>

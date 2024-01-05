@@ -1,18 +1,11 @@
 <script setup>
 const layout = useLayout();
+const currentUser = useCurrentUser();
+const cartItem = ref(currentUser.value.currentUser?.carts)
 
-const cartItem = ref([{
-    image: '/v1699086989/hxhsmc9ihoavcpogkyxw.jpg',
-    name: 't-shirt',
-    price: '20'
 
-},
-{
-    image: '/v1699086989/hxhsmc9ihoavcpogkyxw.jpg',
-    name: 't-shirt',
-    price: '20'
 
-}])
+
 </script>
 
 
@@ -29,7 +22,7 @@ const cartItem = ref([{
 
         <div class="mt-8 text-center">Cart</div>
 
-
+        {{ cart }}
 
         <ul class="flex flex-col flex-1 gap-4 p-6 overflow-y-scroll md:p-8">
             <div v-for="(i, key) in cartItem" :key="key">

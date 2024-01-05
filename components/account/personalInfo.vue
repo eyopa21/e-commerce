@@ -1,6 +1,6 @@
 <script setup>
 import update_query from '../../queries/update/update-user-account.gql'
-import { UserAccountValidationSchema } from '~/zod/UserAccountSchema'; '../../zod/UserAccountSchema'
+import { UserAccountValidationSchema } from '~/zod/UserAccountSchema';
 const { mutate: Update, onDone, onError, loading } = useMutation(update_query)
 const currentUser = useCurrentUser();
 

@@ -31,6 +31,7 @@ export function useHelpers() {
   };
 
   return {
+    altImage: 'v1704485812/placeholder_evluea.jpg',
     formatDate,
     addBodyClass,
     removeBodyClass,
