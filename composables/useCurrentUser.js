@@ -4,7 +4,8 @@ export default function () {
       
       isVerified: null,
       id: null,
-      currentUser: null
+      currentUser: null,
+      cart: null
     };
   });
 }

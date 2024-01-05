@@ -3,7 +3,7 @@ const { altImage } = useHelpers()
 const props = defineProps(['item'])
 
 console.log(props.item)
-const quantity = ref(0)
+const quantity = ref(props.item.quantity)
 
 </script>
 
@@ -27,7 +27,7 @@ const quantity = ref(0)
 
 
             </div>
-            <input v-model.number="props.item.quantity" type="number" min="0" aria-label="Quantity"
+            <input v-model.number="quantity" type="number" min="0" aria-label="Quantity"
                 class="flex items-center justify-center w-16 gap-4 p-2 text-left bg-white border rounded-md focus:outline-none"
                 :disabled="isUpdatingCart" @input="updateQuantity" />
             <button title="Remove Item" aria-label="Remove Item" @click="removeItem" type="button">
