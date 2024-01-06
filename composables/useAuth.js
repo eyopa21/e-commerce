@@ -112,9 +112,9 @@ export const useAuth = () => {
     const myAuth = async () => {
       try {
         const token = await getToken();
-        const claims = await JSON.parse(atob(token.split(".")[1]));
+        const claims = token ? await JSON.parse(atob(token?.split(".")[1])) :'';
         
-        currentUser.value.id = claims.uid
+        currentUser.value.id = claims?.uid
         const { data, error } = await useLazyAsyncQuery(query, { id: currentUser.value.id })
         if (error.value) {
           currentUser.value.id = null

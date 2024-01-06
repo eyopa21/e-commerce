@@ -8,7 +8,7 @@ const quantity = ref(props.item.quantity)
 </script>
 
 <template>
-    <div @remove="removeItem">
+    <div>
         <li class="flex items-center gap-3">
             <NuxtLink :to="`/product/${props.item.product.id}`">
 
@@ -31,7 +31,7 @@ const quantity = ref(props.item.quantity)
                 class="flex items-center justify-center w-16 gap-4 p-2 text-left bg-white border rounded-md focus:outline-none"
                 @input="updateQuantity" />
             <button title="Remove Item" aria-label="Remove Item" @click="removeItem" type="button">
-                <Icon name="ion:close-outline" class="removeItem hover:text-red-500 cursor-pointer p-1.5" size="34" />
+                <Icon name="ion:close-outline" class="inline-block hover:text-red-500 cursor-pointer p-1.5" size="34" />
             </button>
         </li>
     </div>
@@ -42,9 +42,5 @@ const quantity = ref(props.item.quantity)
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
     opacity: 1;
-}
-
-.removeItem {
-    @apply hidden md:inline-block;
 }
 </style>

@@ -22,24 +22,6 @@ query myQuery($id: uuid!){
       created_at
       updated_at
     }
-    carts {
-      id
-      created_at
-      updated_at
-      quantity
-      product {
-        id
-        seller_id
-        title
-        subtitle
-        price
-        description
-        images
-        categories
-        amount_in_stock
-        created_at
-        updated_at
-      }
-    }
+    
   }
 }
