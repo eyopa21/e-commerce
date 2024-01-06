@@ -34,24 +34,7 @@ export const useAuth = () => {
       }
     };
 
-    const logoutUser = async () => {
-      const { clearAllCookies } = useHelpers();
-      isPending.value = true;
-      try {
-        const { logout } = await onLogout();
-        if (logout) {
-          isPending.value = false;
-          await refreshCart();
-          clearAllCookies();
-          viewer.value = null;
-          customer.value = { billing: {}, shipping: {} };
-        }
-        return { success: true, error: null };
-      } catch (error) {
-        isPending.value = false;
-        return { success: false, error };
-      }
-    };
+    
 
     const registerUser = async (userInfo) => {
       isPending.value = true;
@@ -139,7 +122,26 @@ export const useAuth = () => {
         isLoggedIn.value = null
         throw new Error('User not logged in')
       }
+  }
+  
+
+  const { clearAllCookies } = useHelpers();
+  async function logout() {
+    isPending.value = true
+    try {
+       onLogout();
+      currentUser.value.currentUser = null 
+      currentUser.value.id = null
+      currentUser.value.isVerified = null
+       currentUser.value.cart = null
+      clearAllCookies()
+       isPending.value = false
+    } catch (err) {
+      isPending.value = false
+      console.log("err")
+      throw new Error('cannot logout')
     }
+  }
 
     return {
       viewer,
@@ -149,11 +151,12 @@ export const useAuth = () => {
       loginUser,
       updateCustomer,
       updateViewer,
-      logoutUser,
+     
       registerUser,
       sendResetPasswordEmail,
       getOrders,
       myAuth,
-      user
+      user, 
+      logout
     };
   };

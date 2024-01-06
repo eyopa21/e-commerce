@@ -1,9 +1,17 @@
 <script lang="ts" setup>
-
+const isLoggedIn = useCookie('isLoggedIn')
 const route = useRoute();
-
+const { logout, isPending } = useAuth();
 const activeTab = computed(() => route.query.tab || 'my-details');
 
+
+const logoutUser = async () => {
+  try {
+    await logout()
+  } catch (err) {
+    console.log("logout err", err)
+  }
+}
 </script>
 
 <template>
@@ -31,15 +39,16 @@ const activeTab = computed(() => route.query.tab || 'my-details');
           <Icon name="ion:cloud-download-outline" size="22" />
           Downloads
         </NuxtLink>
-        <button class="flex items-center gap-4 p-3 px-4 rounded-lg hover:bg-white hover:text-primary" @click="logoutUser">
-          <LoadingIcon v-if="isPending" size="22" />
+        <button class="flex items-center gap-4 p-3 px-4 rounded-lg hover:bg-white hover:text-primary"
+          @click="logoutUser()">
+          <VueLoadingIcon v-if="isPending" size="22" />
           <Icon v-else name="ion:log-out-outline" size="22" />
           Logout
         </button>
       </nav>
 
       <main class="flex-1 w-full lg:my-8 rounded-lg">
-        <AccountDetails v-if="activeTab === 'my-details'" :user="viewer" />
+        <AccountDetails v-if="activeTab === 'my-details'" />
         <OrderList v-else-if="activeTab === 'orders'" />
       </main>
     </div>
