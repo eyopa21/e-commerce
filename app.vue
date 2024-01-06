@@ -16,7 +16,7 @@ onMounted(async () => {
   <div class="flex flex-col min-h-screen mx-2">
 
     <NuxtLayout>
-      <VueModal />
+
       <NuxtPage />
 
     </NuxtLayout>

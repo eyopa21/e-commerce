@@ -14,6 +14,10 @@ onError(err => {
 })
 
 
+const add = (productID, quantity) => {
+  addToCart(productID, quantity)
+}
+
 </script>
 
 <template>
@@ -60,7 +64,7 @@ onError(err => {
 
         <hr />
 
-        <form @submit.prevent="addToCart(theProduct.id, quantity)">
+        <form @submit.prevent="add(theProduct.id, quantity)">
 
           <div
             class="fixed bottom-0 left-0 z-10 flex items-center w-full gap-4 p-4 mt-12 bg-white md:static md:bg-transparent bg-opacity-90 md:p-0">
