@@ -13,8 +13,8 @@ const props = defineProps({
 </script>
 
 <template>
-  <button type="submit"
-    class="rounded-lg flex font-bold bg-gray-800 text-white text-center min-w-[150px] p-2.5 gap-4 items-center justify-center focus:outline-none">
+  <button type="submit" :disabled="props.loading"
+    class="rounded-lg flex font-bold bg-gray-800 text-white text-center min-w-[150px] p-2.5 gap-4 items-center justify-center focus:outline-none disabled:opacity-30">
     <span>Add to cart</span>
     <VueLoadingIcon v-if="props.loading" stroke="4" size="12" color="#fff" />
   </button>
