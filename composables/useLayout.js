@@ -5,7 +5,8 @@ export default function() {
             showSidebar: false,
             showCart: false,
            showSearch: false,
-            showFilters: false
+            showFilters: false,
+            showModal: true
 
         }
     })

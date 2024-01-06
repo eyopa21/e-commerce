@@ -1,8 +1,16 @@
+
+<script setup>
+const hero = ref('https://res.cloudinary.com/doifglnsi/image/upload/v1704558683/hero-3_xhinck.jpg')
+
+
+</script>
+
 <template>
     <div class="relative mx-auto ">
-        <NuxtImg width="1400" height="800" class="object-cover w-full h-[420px] lg:h-[560px] xl:h-[640px]" src="/hero-3.jpg"
-            alt="Hero image" loading="eager" format="webp" fit="outside" sizes="sm:100vw lg:1400px" fetchpriority="high"
-            preload />
+        <NuxtImg provider="cloudinary" width="1400" height="800" placeholder
+            class="object-cover w-full h-[420px] lg:h-[560px] xl:h-[640px]"
+            :src="hero?.split('upload')[1] ? hero?.split('upload')[1] : '/hero-3.jpg'" alt="Hero image" loading="eager"
+            format="webp" fit="outside" sizes="sm:100vw lg:1400px" fetchpriority="high" preload />
         <div
             class="container absolute inset-0 flex flex-col items-start justify-center text-gray-100 bg-gradient-to-l from-gray-800 md:bg-none p-8">
             <h1 class="text-3xl font-bold md:mb-4 md:text-4xl lg:text-6xl">Just landed.</h1>
@@ -16,3 +24,4 @@
         </div>
     </div>
 </template>
+
