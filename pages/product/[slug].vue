@@ -1,9 +1,10 @@
 <script setup>
 import query from '../queries/get/get-single-product.gql'
 const route = useRoute()
+const layout = useLayout();
 const { addToCart, loading: cartLoading } = useCart()
 const { onResult, onError, loading } = useQuery(query, { product_id: route.params.slug }, { fetchPolicy: 'no-cache', })
-
+const isLoggedIn = useCookie('isLoggedIn')
 const theProduct = ref('')
 const quantity = ref(1)
 onResult(res => {
@@ -15,7 +16,12 @@ onError(err => {
 
 
 const add = (productID, quantity) => {
-  addToCart(productID, quantity)
+  if (isLoggedIn.value) {
+
+    addToCart(productID, quantity)
+  } else {
+    layout.value.showAlert = true
+  }
 }
 
 </script>
@@ -98,6 +104,8 @@ const add = (productID, quantity) => {
       <ProductRow :products="product.related.nodes" class="grid-cols-2 md:grid-cols-4 lg:grid-cols-5" />
     </div-->
   </main>
+  <VueAlert
+    :message="{ type: 'auth', title: 'Authentication error', description: 'PLease login first to access this service!!' }" />
 </template>
 
 <style scoped>

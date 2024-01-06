@@ -6,7 +6,7 @@ export default function() {
             showCart: false,
            showSearch: false,
             showFilters: false,
-            showModal: true
+            showAlert: false
 
         }
     })
