@@ -20,7 +20,7 @@ const register = async () => {
 <template>
     <div class="max-w-lg mx-auto my-16 min-h-[600px] lg:my-24">
         <div class="flex flex-col items-center">
-            <Logo class="mb-6 scale-125" />
+            <h1 class="mb-6 scale-125 text-4xl">LOGO</h1>
             <h1 class="text-xl font-semibold lg:text-3xl">Welcome to our platform</h1>
 
             <div class="my-2 text-center">
@@ -54,16 +54,9 @@ const register = async () => {
                     </label>
                 </UFormGroup>
             </div>
-            <Transition name="scale-y" mode="out-in">
-                <div v-if="message" class="my-4 text-sm text-green-500">
-                    {{ message }}
-                </div>
-            </Transition>
-            <Transition name="scale-y" mode="out-in">
-                <div v-if="errorMessage" class="my-4 text-sm text-red-500">{{ errorMessage }}</div>
-            </Transition>
+
             <button class="flex items-center justify-center gap-4 mt-4 text-lg">
-                <LoadingIcon v-if="isPending" stroke="4" size="16" color="#fff" />
+                <VueLoadingIcon stroke="4" size="16" color="#fff" />
                 <span>Register</span>
             </button>
         </UForm>

@@ -2,34 +2,17 @@
 <script setup>
 import { ForgotPasswordValidationSchema } from '../../zod/ForgotSchema'
 const formView = ref('login');
-const message = ref('');
-const errorMessage = ref('');
+
 const forgotState = ref({
     email: '',
 
 })
-const login = async () => {
-    console.log("login")
-};
 
-const handleFormSubmit = async () => {
-    console.log("Register")
-};
 
 const resetPassword = async () => {
     console.log('reset password')
 };
 
-const buttonText = computed(() => {
-    if (formView.value === 'login') {
-        return 'Login'
-    } else if (formView.value === 'register') {
-        return 'Register'
-    } else if (formView.value === 'forgotPassword') {
-        return 'ResetPassword'
-    }
-    return 'login';
-});
 </script>
 
 
@@ -55,16 +38,9 @@ const buttonText = computed(() => {
                 address and we will
                 send you a link to reset your password.</p>
 
-            <Transition name="scale-y" mode="out-in">
-                <div v-if="message" class="my-4 text-sm text-green-500">
-                    {{ message }}
-                </div>
-            </Transition>
-            <Transition name="scale-y" mode="out-in">
-                <div v-if="errorMessage" class="my-4 text-sm text-red-500">{{ errorMessage }}</div>
-            </Transition>
-            <button class="flex items-center justify-center gap-4 mt-4 text-lg">
-                <LoadingIcon v-if="isPending" stroke="4" size="16" color="#fff" />
+
+            <button type="submit" class="flex items-center justify-center gap-4 mt-4 text-lg">
+                <VueLoadingIcon stroke="4" size="16" color="#fff" />
                 <span>Reset Password</span>
             </button>
         </UForm>
