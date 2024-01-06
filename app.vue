@@ -1,6 +1,7 @@
 <script setup>
 const currentUser = useCurrentUser();
 const { myAuth } = useAuth()
+const { getCart, loading } = useCart()
 onMounted(async () => {
   try {
     const res = await myAuth()
@@ -16,7 +17,8 @@ onMounted(async () => {
 
     <NuxtLayout>
       <NuxtPage />
-      current{{ currentUser }}
+
+
     </NuxtLayout>
 
   </div>

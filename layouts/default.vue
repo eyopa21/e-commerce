@@ -14,7 +14,7 @@ const isDark = computed({
     <div>
         <LazyNavHeader />
         <Transition name="slide-from-right">
-            <LazyCart v-if="layout.showCart" />
+            <Cart v-if="layout.showCart" />
         </Transition>
         <Transition name="slide-from-left">
             <NavMobileMenu v-if="layout.showSidebar" />

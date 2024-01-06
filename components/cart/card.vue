@@ -2,13 +2,13 @@
 const { altImage } = useHelpers()
 const props = defineProps(['item'])
 
-console.log(props.item)
+
 const quantity = ref(props.item.quantity)
 
 </script>
 
 <template>
-    <SwipeCard @remove="removeItem">
+    <div @remove="removeItem">
         <li class="flex items-center gap-3">
             <NuxtLink :to="`/product/${props.item.product.id}`">
 
@@ -29,12 +29,12 @@ const quantity = ref(props.item.quantity)
             </div>
             <input v-model.number="quantity" type="number" min="0" aria-label="Quantity"
                 class="flex items-center justify-center w-16 gap-4 p-2 text-left bg-white border rounded-md focus:outline-none"
-                :disabled="isUpdatingCart" @input="updateQuantity" />
+                @input="updateQuantity" />
             <button title="Remove Item" aria-label="Remove Item" @click="removeItem" type="button">
                 <Icon name="ion:close-outline" class="removeItem hover:text-red-500 cursor-pointer p-1.5" size="34" />
             </button>
         </li>
-    </SwipeCard>
+    </div>
 </template>
 
 <style scoped lang="postcss">

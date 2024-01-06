@@ -1,21 +1,18 @@
 <script setup>
 const layout = useLayout();
-const { getCart } = useCart()
+const { clearCart, getCart, loading } = useCart()
 const currentUser = useCurrentUser();
 const cartItem = ref(computed(() => {
-    return currentUser.value.currentUser?.carts
+    return currentUser.value.cart
 }))
 
-onMounted(async () => {
 
-    try {
-        const res = await getCart()
-        console.log("cartilalala", res)
-    } catch (err) {
-        console.log("cart erorororo", err)
-    }
-})
 
+try {
+    const res = await getCart()
+} catch (err) {
+    console.log("cart erorororo", err)
+}
 
 </script>
 
@@ -25,7 +22,7 @@ onMounted(async () => {
         <Icon name="ion:close-outline" class="absolute p-1 bg-white rounded-lg shadow-lg top-6 left-6 md:left-8" size="34"
             @click="layout.showCart = false" />
         <div v-if="cartItem?.length" class="rounded-lg shadow-lg p-1.5 hover:bg-red-400 hover:text-white">
-            <button class="cursor-pointer top-6 right-6 md:right-8 absolute" title="Empty Cart" @click="emptyCart">
+            <button class="cursor-pointer top-6 right-6 md:right-8 absolute" title="Empty Cart" @click="clearCart">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 512 512">
                     <path d="M112 112l20 320c.95 18.49 14.4 32 32 32h184c17.67 0 30.87-13.51 32-32l20-320" fill="none"
                         stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" />
@@ -42,7 +39,7 @@ onMounted(async () => {
 
         <div class="mt-8 text-center">Cart</div>
 
-        {{ cart }}
+        {{ loading }}
 
         <ul v-if="cartItem?.length" class="flex flex-col flex-1 gap-4 p-6 overflow-y-scroll md:p-8">
             <div v-for="(i, key) in cartItem" :key="key">
@@ -64,8 +61,8 @@ onMounted(async () => {
         </div>
 
         <!-- Cart Loading Overlay -->
-        <div v-if="isUpdatingCart" class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-25">
-            <LoadingIcon />
+        <div v-if="loading" class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-25">
+            <VueLoadingIcon />
         </div>
     </div>
 </template>
