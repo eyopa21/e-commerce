@@ -1,5 +1,6 @@
 import query from "../queries/get/get-cart.gql";
-import remove_query from "../queries/delete/clear-cart.gql";
+import clear_query from "../queries/delete/clear-cart.gql";
+import remove_query from "../queries/delete/remove-cart-item.gql";
 export function useCart() {
   const nuxtApp = useNuxtApp();
   const currentUser = useCurrentUser();
@@ -32,11 +33,8 @@ export function useCart() {
 
     loading.value = loadin;
     const result = await load()
-    console.log("test", result)
-
-    
     if (error.value) {
-      console.log("carti eroro", error.value);
+      console.log("cart fetch error", error.value);
       throw new Error("Cannot fetch cart");
     } else {
 
@@ -49,21 +47,34 @@ export function useCart() {
   }
 
   async function clearCart() {
-    const { mutate: deleteCart } = useMutation(remove_query);
-    loading.value = true;
+    const { mutate: DeleteCart, loading:loadin } = useMutation(clear_query);
+    loading.value = loadin;
 
     try {
-      await deleteCart({ user_id: currentUser.value.id });
+      await DeleteCart({ user_id: currentUser.value.id });
       await getCart()
-      loading.value = false;
     } catch (err) {
       console.log(err);
-      loading.value = false;
+      throw new Error("Cannot Clear cart");
+    }
+  }
+
+
+  async function removeItem(id) {
+    console.log("idd",id)
+    const { mutate: RemoveItem, loading: loadin } = useMutation(remove_query);
+     loading.value = loadin;
+    try {
+      await RemoveItem({ id: id })
+      await getCart()
+    } catch (err) {
+      console.log("reomve error", err)
       throw new Error("Cannot remove cart");
     }
   }
 
   return {
+    removeItem,
     clearCart,
     getCart,
     loading,

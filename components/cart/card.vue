@@ -1,7 +1,16 @@
 <script setup>
 const { altImage } = useHelpers()
 const props = defineProps(['item'])
+const { removeItem } = useCart();
 
+const remove = async (id) => {
+    console.log("removing")
+    try {
+        await removeItem(id);
+    } catch (err) {
+        console.log("errrrrr", err)
+    }
+}
 
 const quantity = ref(props.item.quantity)
 
@@ -30,7 +39,7 @@ const quantity = ref(props.item.quantity)
             <input v-model.number="quantity" type="number" min="0" aria-label="Quantity"
                 class="flex items-center justify-center w-16 gap-4 p-2 text-left bg-white border rounded-md focus:outline-none"
                 @input="updateQuantity" />
-            <button title="Remove Item" aria-label="Remove Item" @click="removeItem" type="button">
+            <button title="Remove Item" aria-label="Remove Item" @click="remove(props.item.id)" type="button">
                 <Icon name="ion:close-outline" class="inline-block hover:text-red-500 cursor-pointer p-1.5" size="34" />
             </button>
         </li>

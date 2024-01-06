@@ -1,5 +1,7 @@
 <script setup>
 const layout = useLayout()
+const currentUser = useCurrentUser();
+const isLoggedIn = useCookie('isLoggedIn');
 </script>
 
 <template>
@@ -7,8 +9,9 @@ const layout = useLayout()
         <Icon name="ion:cart-outline" size="20" class="mr-1 md:mr-0" />
         <ClientOnly>
             <Transition name="popIn" mode="out-in">
-                <span
-                    class="bg-primary rounded-full text-white leading-none min-w-[16px] p-[3px] -top-1 -right-1 md:-right-2 text-[10px] absolute inline-flex justify-center items-center">22</span>
+                <span v-if="isLoggedIn && currentUser.cart?.length"
+                    class="bg-primary rounded-full text-white leading-none min-w-[16px] p-[3px] -top-1 -right-1 md:-right-2 text-[10px] absolute inline-flex justify-center items-center">{{
+                        currentUser.cart?.length }}</span>
             </Transition>
         </ClientOnly>
     </div>
