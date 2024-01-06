@@ -1,13 +1,18 @@
-<script lang="ts" setup>
+<script setup>
+import query from '../queries/get/get-single-product.gql'
+const route = useRoute()
+const { addToCart, loading: cartLoading } = useCart()
+const { onResult, onError, loading } = useQuery(query, { product_id: route.params.slug }, { fetchPolicy: 'no-cache', })
 
-const theProduct = ref({
-  id: '1',
-  images: ['/hero-3.jpg', '/placeholder.jpg', '/hero-3.jpg', '/placeholder.jpg'],
-  title: 'Yellow boots',
-  subtitle: 'subtitle',
-  description: 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo xsppil.',
-  price: 40
+const theProduct = ref('')
+const quantity = ref(1)
+onResult(res => {
+  theProduct.value = res.data.products_by_pk
 })
+onError(err => {
+  console.log("err", err)
+})
+
 
 </script>
 
@@ -17,9 +22,8 @@ const theProduct = ref({
       class="mb-6" />
 
     <div class="flex flex-col gap-10 md:flex-row md:justify-between lg:gap-24">
-      <ProductImageGallery class="relative flex-1" :first-image="theProduct.images[0]"
-        :main-image="theProduct.images[1] || '/images/placeholder.jpg'" :gallery="theProduct.images"
-        :node="theProduct.images" />
+      <ProductImageGallery class="relative flex-1" :main-image="theProduct.images[0] || '/images/placeholder.jpg'"
+        :gallery="theProduct.images" :node="theProduct.images" />
       <!--NuxtImg v-else class="relative flex-1" src="/images/placeholder.jpg" :alt="product?.name || 'Product'" /-->
 
       <div class="lg:max-w-md xl:max-w-lg md:py-2">
@@ -52,19 +56,17 @@ const theProduct = ref({
           </div>
         </div>
 
-        <div class="mb-8 font-light prose" v-html="theProduct.description" />
+        <div class="mb-8 font-light prose">{{ theProduct.description }}</div>
 
         <hr />
 
-        <form @submit.prevent="addToCart(selectProductInput)">
-          <!--AttributeSelections v-if="product.type == 'VARIABLE' && product.attributes && product.variations"
-            class="mt-4 mb-8" :attrs="product.attributes.nodes" :variations="product.variations.nodes"
-            @attrs-changed="updateSelectedVariations" /-->
+        <form @submit.prevent="addToCart(theProduct.id, quantity)">
+
           <div
             class="fixed bottom-0 left-0 z-10 flex items-center w-full gap-4 p-4 mt-12 bg-white md:static md:bg-transparent bg-opacity-90 md:p-0">
-            <input type="number" min="1" aria-label="Quantity"
+            <input v-model="quantity" type="number" min="1" aria-label="Quantity"
               class="bg-white border rounded-lg flex text-left p-2.5 w-20 gap-4 items-center justify-center focus:outline-none" />
-            <VueButtonAddToCart class="flex-1 w-full md:max-w-xs" :disabled="false" :class="{ loading: false }" />
+            <VueButtonAddToCart :loading="cartLoading" class="flex-1 w-full md:max-w-xs" />
           </div>
         </form>
 

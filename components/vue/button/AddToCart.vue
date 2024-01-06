@@ -2,8 +2,9 @@
 
 const props = defineProps({
   disabled: { type: Boolean, default: false },
+  loading: { type: Boolean, default: false },
 });
-const isLoading = ref(false);
+
 
 // stop loading when cart is updated
 //watch(cart, (val) => {
@@ -13,10 +14,9 @@ const isLoading = ref(false);
 
 <template>
   <button type="submit"
-    class="rounded-lg flex font-bold bg-gray-800 text-white text-center min-w-[150px] p-2.5 gap-4 items-center justify-center focus:outline-none"
-    :class="{ disabled: disabled }" :disabled="disabled" @click="isLoading = true">
+    class="rounded-lg flex font-bold bg-gray-800 text-white text-center min-w-[150px] p-2.5 gap-4 items-center justify-center focus:outline-none">
     <span>Add to cart</span>
-    <LoadingIcon v-if="isLoading" stroke="4" size="12" color="#fff" />
+    <VueLoadingIcon v-if="props.loading" stroke="4" size="12" color="#fff" />
   </button>
 </template>
 

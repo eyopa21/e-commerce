@@ -1,0 +1,25 @@
+query myQuery($product_id: uuid!){
+  products_by_pk(id: $product_id){
+    id
+    title
+    subtitle
+    price
+    description
+    images
+    amount_in_stock
+    categories
+    created_at
+    updated_at
+    seller {
+      id
+      email
+      last_name
+      phone_number
+      first_name
+      user_name
+      shop_type
+      shop_name
+    }
+  }
+}
+

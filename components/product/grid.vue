@@ -1,30 +1,34 @@
 
 <script setup>
+import query from '../../queries/get/get-products.gql'
+const products = ref([])
 
-const products = ref([{
-    name: 'Nike Aireforce',
-    image: '/hero-3.jpg'
-},
-{
-    name: 'Nike Aireforce',
-    image: '/hero-3.jpg'
-},
-{
-    name: 'Nike Aireforce',
-    image: '/hero-3.jpg'
-}])
+const { onResult, onError, loading } = useQuery(query, { fetchPolicy: 'no-cache', })
 
-
+onResult(res => {
+    console.log("res", res.data.products)
+    products.value = res.data.products
+})
+onError(err => {
+    console.log("err", err)
+})
 </script>
 
 
 <template>
     <Transition name="fade" mode="out-in">
         <section class="relative w-full">
-            <TransitionGroup name="shrink" tag="div" mode="in-out" class="product-grid">
-                <ProductCard v-for="(i, key) in products" :key="key" :product="i" />
+            <TransitionGroup v-if="loading" name="shrink" tag="div" mode="in-out" class="product-grid">
+                <div class="grid grid-cols-4 gap-3">
+
+                    <VueSkeleton v-for="(i, key) in 12" :key="key" />
+                </div>
+            </TransitionGroup>
+            <TransitionGroup v-else name="shrink" tag="div" mode="in-out" class="product-grid">
+                <ProductCard v-for="(i, key) in products" :key="key" :product="i" :index="key" />
             </TransitionGroup>
             <Pagination />
+
         </section>
         <!--NoProductsFound /-->
     </Transition>

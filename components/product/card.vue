@@ -1,27 +1,29 @@
 
 <script setup>
-const props = defineProps(['product'])
+const props = defineProps(['product', 'index'])
+const imgWidth = 220;
+const imgHeight = Math.round(imgWidth * 1.125);
 </script>
 
 <template>
     <div class="relative product-card">
-        <NuxtLink :to="`/product/1`" :title="props.product.name">
+        <NuxtLink :to="`/product/${props.product.id}`" :title="props.product.title">
             <VueSaleBadge :node="node" class="absolute top-2 right-2" />
             <!--img v-if="colorVariableImage" :src="colorVariableImage" :alt="node.image?.altText || node.name"
                 :title="node.image?.title || node.name" :loading="index <= 3 ? 'eager' : 'lazy'" /-->
-            <NuxtImg :width="imgWidth" :height="imgHeight" :src="props.product.image || '/placeholder.jpg'"
-                alt="image product" :title="props.product.name" :loading="index <= 3 ? 'eager' : 'lazy'" fit="outside"
-                format="webp" densities="x1 x2" />
+            <NuxtImg :width="imgWidth" :height="imgHeight" :src="props.product.images[0] || '/placeholder.jpg'"
+                alt="image product" :title="props.product.name" :loading="props.index <= 3 ? 'eager' : 'lazy'" fit="outside"
+                format="webp" densities="x1 x2" class="object-cover" />
         </NuxtLink>
         <div class="p-2">
             <VueStarRating :rating="5" :count="2" />
-            <NuxtLink :to="`/product/1`" :title="props.product.name">
-                <h2 class="mb-2 font-light leading-tight">{{ props.product.name }}</h2>
+            <NuxtLink :to="`/product/${props.product.id}`" :title="props.product.title">
+                <h2 class="mb-2 font-light leading-tight">{{ props.product.title }}</h2>
             </NuxtLink>
 
             <div class="text-sm">
                 <div class="flex">
-                    <span class="font-semibold ml-2"> salePrice</span>
+                    <span class="font-semibold ">{{ props.product.price }}$</span>
                 </div>
             </div>
         </div>

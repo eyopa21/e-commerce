@@ -1,6 +1,7 @@
 import query from "../queries/get/get-cart.gql";
 import clear_query from "../queries/delete/clear-cart.gql";
 import remove_query from "../queries/delete/remove-cart-item.gql";
+import add_to_cart_query from "../queries/insert/add-to-cart.gql";
 export function useCart() {
   const nuxtApp = useNuxtApp();
   const currentUser = useCurrentUser();
@@ -73,7 +74,21 @@ export function useCart() {
     }
   }
 
+  async function addToCart(productID, quantity) {
+    console.log(productID, "pro ID", quantity)
+  const { mutate: AddToCart, loading: loadin } = useMutation(add_to_cart_query);
+     loading.value = loadin;
+    try {
+      await AddToCart({user_id: currentUser.value.id, product_id: productID, quantity: quantity})
+      //await getCart()
+    } catch (err) {
+      console.log("reomve error", err)
+      throw new Error("Cannot remove cart");
+    }
+  }
+
   return {
+    addToCart,
     removeItem,
     clearCart,
     getCart,
