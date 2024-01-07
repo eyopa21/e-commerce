@@ -1,5 +1,5 @@
 <script setup>
-import category_query from '../queries/get/get-categories.gql'
+import query from '../queries/get/get-products&categories.gql'
 const currentUser = useCurrentUser();
 const mainData = useData();
 const { myAuth } = useAuth()
@@ -12,12 +12,14 @@ onMounted(async () => {
     console.log("tokierror", err)
   }
 })
-const { data, error } = useLazyAsyncQuery(category_query);
+const { data, error } = useLazyAsyncQuery(query);
 if (error.value) {
   console.log("cat eror", error.value)
 } else {
   console.log("cat res", data.value)
   mainData.value.categories = data.value?.categories;
+  mainData.value.products = data.value?.products;
+
 }
 </script>
 

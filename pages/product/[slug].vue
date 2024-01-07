@@ -1,26 +1,19 @@
 <script setup>
 import query from '../queries/get/get-single-product.gql'
 const route = useRoute()
-const layout = useLayout();
+const layout = useLayout()
+const mainData = useData();
 const { addToCart, loading: cartLoading } = useCart()
-const { onResult, onError, loading } = useQuery(query, { product_id: route.params.slug }, { fetchPolicy: 'no-cache', })
 const isLoggedIn = useCookie('isLoggedIn')
-const theProduct = ref('')
+
+const theProduct = mainData.value.products?.filter(product => {
+
+  return product.id === route.params.slug;
+})
+
 const quantity = ref(1)
-const isEmpty = ref(false)
-onResult(res => {
-  if (!res.data.products_by_pk) {
-    isEmpty.value = true
-  }
-  else {
-    theProduct.value = res.data.products_by_pk
-    isEmpty.value = false
-  }
-})
-onError(err => {
-  clearError({ redirect: '/homepage' })
-  console.log("erredsda", err)
-})
+
+
 
 
 const add = (productID, quantity) => {
@@ -35,23 +28,23 @@ const add = (productID, quantity) => {
 </script>
 
 <template>
-  <div>
+  <ClientOnly>
 
 
-    <div v-if="theProduct" class="container relative py-6 xl:max-w-7xl">
+    <div v-if="theProduct?.length" class="container relative py-6 xl:max-w-7xl">
       <VueBreadcrumb :data="[{ name: 'Products', to: '/products' }, { name: 'Clothing', to: '/categories' }]"
         class="mb-6" />
 
       <div class="flex flex-col gap-10 md:flex-row md:justify-between lg:gap-24">
-        <ProductImageGallery class="relative flex-1" :main-image="theProduct.images[0] || '/images/placeholder.jpg'"
-          :gallery="theProduct.images" :node="theProduct.images" />
+        <ProductImageGallery class="relative flex-1" :main-image="theProduct[0].images[0] || '/images/placeholder.jpg'"
+          :gallery="theProduct[0].images" :node="theProduct[0].images" />
 
 
         <div class="lg:max-w-md xl:max-w-lg md:py-2">
           <div class="flex justify-between mb-4">
             <div class="flex-1">
               <h1 class="flex flex-wrap items-center gap-2 mb-2 text-2xl font-sesmibold">
-                {{ theProduct.title }}
+                {{ theProduct[0].title }}
 
               </h1>
               <VueStarRating :rating="4" :count="5" />
@@ -60,7 +53,7 @@ const add = (productID, quantity) => {
             <div class="text-xl">
               <div class="flex">
                 <span class="font-semibold" />
-                <span class="font-semibold ml-2">{{ theProduct.price }}$</span>
+                <span class="font-semibold ml-2">{{ theProduct[0].price }}$</span>
               </div>
             </div>
           </div>
@@ -73,15 +66,15 @@ const add = (productID, quantity) => {
             </div>
             <div class="flex items-center gap-2">
               <span class="text-gray-400">SUbtitle: </span>
-              <span>{{ theProduct.subtitle }}</span>
+              <span>{{ theProduct[0].subtitle }}</span>
             </div>
           </div>
 
-          <div class="mb-8 font-light prose">{{ theProduct.description }}</div>
+          <div class="mb-8 font-light prose">{{ theProduct[0].description }}</div>
 
           <hr />
 
-          <form @submit.prevent="add(theProduct.id, quantity)">
+          <form @submit.prevent="add(theProduct[0].id, quantity)">
 
             <div
               class="fixed bottom-0 left-0 z-10 flex items-center w-full gap-4 p-4 mt-12 bg-white md:static md:bg-transparent bg-opacity-90 md:p-0">
@@ -103,15 +96,15 @@ const add = (productID, quantity) => {
           </div>
           <hr />
           <div class="flex flex-wrap gap-4">
-            <VueButtonWishlistButton :product="theProduct" />
-            <VueButtonShareButton :product="theProduct" />
+            <VueButtonWishlistButton :product="theProduct[0]" />
+            <VueButtonShareButton :product="theProduct[0]" />
           </div>
         </div>
       </div>
       <VueAlert
         :message="{ type: 'auth', title: 'Authentication error', description: 'PLease login first to access this service!!' }" />
     </div>
-    <div v-if="isEmpty">
+    <div v-else>
       <VueNoProductsFound />
     </div>
 
@@ -124,7 +117,7 @@ const add = (productID, quantity) => {
     </div>
 
 
-  </div>
+  </ClientOnly>
 </template>
 
 <style scoped>

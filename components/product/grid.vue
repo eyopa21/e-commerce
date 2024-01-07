@@ -8,20 +8,7 @@ const products = ref(computed(() => {
     return mainData.value.products;
 }))
 
-const { onResult, onError, loading } = useQuery(query, { fetchPolicy: 'no-cache', })
 
-onResult(res => {
-    console.log("res", res.data.products)
-    if (!res.data.products?.length) {
-        isEmpty.value = true
-    } else {
-        mainData.value.products = res.data.products
-        isEmpty.value = false
-    }
-})
-onError(err => {
-    console.log("erreeer", err)
-})
 </script>
 
 
@@ -33,7 +20,7 @@ onError(err => {
             <section v-if="mainData.products?.length" class="relative w-full">
 
 
-                <div v-if="loading">
+                <!--div v-if="loading">
 
                     <TransitionGroup name="shrink" tag="div" mode="in-out" class="">
                         <div class="grid grid-cols-4 gap-3 product-grid">
@@ -41,9 +28,9 @@ onError(err => {
                             <VueSkeleton v-for="(i, key) in 12" :key="key" />
                         </div>
                     </TransitionGroup>
-                </div>
+                </!--div-->
 
-                <TransitionGroup v-else name="shrink" tag="div" mode="out-in" class="product-grid">
+                <TransitionGroup name="shrink" tag="div" mode="out-in" class="product-grid">
 
                     <ProductCard v-for="(i, key) in products" :key="key" :product="i" :index="key" />
 
