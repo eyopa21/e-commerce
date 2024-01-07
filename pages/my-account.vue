@@ -37,12 +37,7 @@ const logoutUser = async () => {
           <Icon name="ion:bag-check-outline" size="22" />
           Orders
         </NuxtLink>
-        <NuxtLink to="/my-account?tab=downloads"
-          class="flex items-center gap-4 p-3 px-4 rounded-lg hover:bg-white hover:text-primary"
-          :class="{ active: activeTab == 'downloads' }">
-          <Icon name="ion:cloud-download-outline" size="22" />
-          Downloads
-        </NuxtLink>
+
         <button class="flex items-center gap-4 p-3 px-4 rounded-lg hover:bg-white hover:text-primary" @click="logoutUser">
           <VueLoadingIcon v-if="isPending" size="22" />
           <Icon v-else name="ion:log-out-outline" size="22" />

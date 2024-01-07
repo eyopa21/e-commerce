@@ -6,7 +6,7 @@ export const useAuth = () => {
 
   const customer = useState('customer', () => ({ billing: {}, shipping: {} }));
   const viewer = useState('viewer', () => null);
-  const isPending = useState('isPending', () => true);
+  const isPending = useState('isPending', () => false);
   const orders = useState('orders', () => null);
   const user = useState('user', () => ({ isVerified: false, id: null, user: null }));
   const currentUser = useCurrentUser();
