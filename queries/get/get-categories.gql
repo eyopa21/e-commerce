@@ -1,0 +1,10 @@
+query GetCategories {
+  categories {
+    id
+    description
+    image
+    name
+    created_at
+    updated_at
+  }
+}

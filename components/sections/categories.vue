@@ -1,36 +1,7 @@
 <script setup>
+const mainData = useData();
+const categories = ref(mainData.value.categories)
 
-const categories = ref([{
-    image: '/hero-3.jpg',
-    title: 'shoes',
-    name: 'shoes'
-
-}, {
-    image: '/hero-3.jpg',
-    title: 'shoes',
-    name: 'shoes'
-
-}, {
-    image: '/hero-3.jpg',
-    title: 'shoes',
-    name: 'shoes'
-
-}, {
-    image: '/hero-3.jpg',
-    title: 'shoes',
-    name: 'shoes'
-
-}, {
-    image: '/hero-3.jpg',
-    title: 'shoes',
-    name: 'shoes'
-
-}, {
-    image: '/hero-3.jpg',
-    title: 'shoes',
-    name: 'shoes'
-
-}])
 </script>
 
 <template>

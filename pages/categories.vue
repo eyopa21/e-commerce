@@ -1,37 +1,7 @@
 <script setup>
+const mainData = useData();
 
-
-const categories = ref([{
-  image: '/hero-3.jpg',
-  title: 'shoes',
-  name: 'shoes'
-
-}, {
-  image: '/hero-3.jpg',
-  title: 'shoes',
-  name: 'shoes'
-
-}, {
-  image: '/hero-3.jpg',
-  title: 'shoes',
-  name: 'shoes'
-
-}, {
-  image: '/hero-3.jpg',
-  title: 'shoes',
-  name: 'shoes'
-
-}, {
-  image: '/hero-3.jpg',
-  title: 'shoes',
-  name: 'shoes'
-
-}, {
-  image: '/hero-3.jpg',
-  title: 'shoes',
-  name: 'shoes'
-
-}])
+const categories = ref(mainData.value.categories)
 
 useHead({
   title: `Product Categories - WooNuxt`,
