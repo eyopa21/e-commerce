@@ -30,9 +30,11 @@ const login = async () => {
     onDone(async res => {
         console.log(res)
         await onLogin(res.data.Login.token)
+
         try {
             const res = await myAuth()
             console.log("tokichaw", res)
+            router.push('/')
         } catch (err) {
             console.log(err, "err")
         }

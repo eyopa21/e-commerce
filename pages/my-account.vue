@@ -1,16 +1,20 @@
-<script lang="ts" setup>
+<script setup>
 const isLoggedIn = useCookie('isLoggedIn')
 const route = useRoute();
 const { logout, isPending } = useAuth();
 const activeTab = computed(() => route.query.tab || 'my-details');
-
-
+const { onLogin, onLogout, getToken } = useApollo()
+const currentUser = useCurrentUser()
+const { clearAllCookies } = useHelpers();
 const logoutUser = async () => {
+
   try {
-    await logout()
-  } catch (err) {
-    console.log("logout err", err)
+    await logout();
+  } catch (error) {
+    console.log("logout eroror", error)
   }
+
+
 }
 </script>
 
@@ -25,7 +29,7 @@ const logoutUser = async () => {
           class="flex items-center gap-4 p-3 px-4 rounded-lg hover:bg-white hover:text-primary"
           :class="{ active: activeTab == 'my-details' }">
           <Icon name="ion:information-circle-outline" size="22" />
-          My details
+          My details{{ isPending }}
         </NuxtLink>
         <NuxtLink to="/my-account?tab=orders"
           class="flex items-center gap-4 p-3 px-4 rounded-lg hover:bg-white hover:text-primary"
@@ -39,8 +43,7 @@ const logoutUser = async () => {
           <Icon name="ion:cloud-download-outline" size="22" />
           Downloads
         </NuxtLink>
-        <button class="flex items-center gap-4 p-3 px-4 rounded-lg hover:bg-white hover:text-primary"
-          @click="logoutUser()">
+        <button class="flex items-center gap-4 p-3 px-4 rounded-lg hover:bg-white hover:text-primary" @click="logoutUser">
           <VueLoadingIcon v-if="isPending" size="22" />
           <Icon v-else name="ion:log-out-outline" size="22" />
           Logout

@@ -6,7 +6,7 @@ export const useAuth = () => {
 
   const customer = useState('customer', () => ({ billing: {}, shipping: {} }));
   const viewer = useState('viewer', () => null);
-  const isPending = useState('isPending', () => false);
+  const isPending = useState('isPending', () => true);
   const orders = useState('orders', () => null);
   const user = useState('user', () => ({ isVerified: false, id: null, user: null }));
   const currentUser = useCurrentUser();
@@ -127,7 +127,10 @@ export const useAuth = () => {
 
   const { clearAllCookies } = useHelpers();
   async function logout() {
+
+    console.log("logoutting")
     isPending.value = true
+    console.log("isPending", isPending.value)
     try {
        onLogout();
       currentUser.value.currentUser = null 
@@ -135,7 +138,8 @@ export const useAuth = () => {
       currentUser.value.isVerified = null
        currentUser.value.cart = null
       clearAllCookies()
-       isPending.value = false
+      isPending.value = false
+      router.push('/auth/login')
     } catch (err) {
       isPending.value = false
       console.log("err")
