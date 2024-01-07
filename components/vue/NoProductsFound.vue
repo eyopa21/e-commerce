@@ -1,14 +1,5 @@
 <script setup lang="ts">
-/*
-const { allProducts } = useProducts();
-const { clearSearchQuery, isSearchActive } = useSearching();
-const { resetFilter, isFiltersActive } = useFiltering();
-
-const clearAll = () => {
-  if (isFiltersActive.value) resetFilter();
-  if (isSearchActive.value) clearSearchQuery();
-};
-*/
+const props = defineProps(['message'])
 </script>
 
 <template>
@@ -17,7 +8,7 @@ const clearAll = () => {
       <Icon name="ion:sad-outline" size="156" class="opacity-25 mb-10" />
       <h2 class="text-2xl font-bold">No products found</h2>
       <p class="mt-4 max-w-xs">
-        Try adjusting your search or filter to find what you're looking for.
+        {{ props.message }} Try adjusting your search or filter to find what you're looking for.
       </p>
       <div>
         <button class="bg-primary rounded-lg font-bold mt-8 text-center text-white text-sm w-full p-2 px-3 inline-block"

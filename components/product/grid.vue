@@ -1,16 +1,26 @@
 
 <script setup>
 import query from '../../queries/get/get-products.gql'
-const products = ref([])
+const mainData = useData();
+const route = useRoute()
+const isEmpty = ref(false)
+const products = ref(computed(() => {
+    return mainData.value.products;
+}))
 
 const { onResult, onError, loading } = useQuery(query, { fetchPolicy: 'no-cache', })
 
 onResult(res => {
     console.log("res", res.data.products)
-    products.value = res.data.products
+    if (!res.data.products?.length) {
+        isEmpty.value = true
+    } else {
+        mainData.value.products = res.data.products
+        isEmpty.value = false
+    }
 })
 onError(err => {
-    console.log("err", err)
+    console.log("erreeer", err)
 })
 </script>
 
@@ -20,35 +30,39 @@ onError(err => {
 
 
         <Transition name="fade" mode="out-in">
-            <section class="relative w-full">
-
-                <ClientOnly>
-                    <div v-if="loading">
-
-                        <TransitionGroup name="shrink" tag="div" mode="in-out" class="">
-                            <div class="grid grid-cols-4 gap-3 product-grid">
-
-                                <VueSkeleton v-for="(i, key) in 12" :key="key" />
-                            </div>
-                        </TransitionGroup>
-                    </div>
-
-                    <TransitionGroup v-else name="shrink" tag="div" mode="out-in" class="product-grid">
+            <section v-if="mainData.products?.length" class="relative w-full">
 
 
-                        <ProductCard v-for="(i, key) in products" :key="key" :product="i" :index="key" />
+                <div v-if="loading">
 
+                    <TransitionGroup name="shrink" tag="div" mode="in-out" class="">
+                        <div class="grid grid-cols-4 gap-3 product-grid">
+
+                            <VueSkeleton v-for="(i, key) in 12" :key="key" />
+                        </div>
                     </TransitionGroup>
-                </ClientOnly>
+                </div>
+
+                <TransitionGroup v-else name="shrink" tag="div" mode="out-in" class="product-grid">
+
+                    <ProductCard v-for="(i, key) in products" :key="key" :product="i" :index="key" />
+
+                </TransitionGroup>
 
 
 
 
-                <VuePagination />
+
+                <VuePagination v-if="route.name === 'products'" />
 
             </section>
 
+
+
         </Transition>
+        <div v-if="isEmpty">
+            <VueNoProductsFound message="Could not fecth products from your store. Please check your configuration." />
+        </div>
     </div>
 </template>
 
