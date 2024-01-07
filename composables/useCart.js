@@ -80,7 +80,7 @@ export function useCart() {
      loading.value = loadin;
     try {
       await AddToCart({user_id: currentUser.value.id, product_id: productID, quantity: quantity})
-      //await getCart()
+      await getCart()
     } catch (err) {
       console.log("reomve error", err)
       throw new Error("Cannot remove cart");

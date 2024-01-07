@@ -1,4 +1,5 @@
 <script setup>
+import { TransitionChild } from '@headlessui/vue'
 const router = useRouter();
 const layout = useLayout()
 const props = defineProps(['message'])
@@ -7,6 +8,7 @@ const proceedToLogin = () => {
     router.push('/auth/login')
     layout.value.showAlert = false;
 }
+
 </script>
 
 <template>

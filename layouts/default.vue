@@ -27,7 +27,7 @@ const isDark = computed({
 
 
         <!-- Back to Top & Light/Dark Toggle -->
-        <div class="fixed lg:bottom-5 end-5 bottom-18 flex flex-col items-center bg-primary/25 rounded-full z-10">
+        <!--div class="fixed lg:bottom-5 end-5 bottom-18 flex flex-col items-center bg-primary/25 rounded-full z-10">
             <ClientOnly>
                 <UButton :icon="isDark ? 'i-heroicons-sun-20-solid' : 'i-heroicons-moon-20-solid'" color="gray"
                     variant="ghost" aria-label="Theme" @click="isDark = !isDark" />
@@ -36,7 +36,7 @@ const isDark = computed({
                     <div class="w-8 h-8 bg-primary rounded-full" />
                 </template>
             </ClientOnly>
-        </div>
+        </!--div-->
 
 
     </div>

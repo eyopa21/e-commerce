@@ -28,7 +28,7 @@ const add = (productID, quantity) => {
 </script>
 
 <template>
-  <ClientOnly>
+  <div>
 
 
     <div v-if="theProduct?.length" class="container relative py-6 xl:max-w-7xl">
@@ -117,7 +117,7 @@ const add = (productID, quantity) => {
     </div>
 
 
-  </ClientOnly>
+  </div>
 </template>
 
 <style scoped>
