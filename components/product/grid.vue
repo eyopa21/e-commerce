@@ -25,8 +25,8 @@ onError(err => {
                 <ClientOnly>
                     <div v-if="loading">
 
-                        <TransitionGroup name="shrink" tag="div" mode="in-out" class="product-grid">
-                            <div class="grid grid-cols-4 gap-3">
+                        <TransitionGroup name="shrink" tag="div" mode="in-out" class="">
+                            <div class="grid grid-cols-4 gap-3 product-grid">
 
                                 <VueSkeleton v-for="(i, key) in 12" :key="key" />
                             </div>
