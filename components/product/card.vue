@@ -6,9 +6,9 @@ const imgHeight = Math.round(imgWidth * 1.125);
 </script>
 
 <template>
-    <div class="relative product-card">
+    <li class="relative product-card">
         <NuxtLink :to="`/product/${props.product.id}`" :title="props.product.title">
-            <VueSaleBadge :node="node" class="absolute top-2 right-2" />
+            <VueSaleBadge class="absolute top-2 right-2" />
             <!--img v-if="colorVariableImage" :src="colorVariableImage" :alt="node.image?.altText || node.name"
                 :title="node.image?.title || node.name" :loading="index <= 3 ? 'eager' : 'lazy'" /-->
             <NuxtImg :width="imgWidth" :height="imgHeight" :src="props.product.images[0] || '/placeholder.jpg'"
@@ -27,7 +27,7 @@ const imgHeight = Math.round(imgWidth * 1.125);
                 </div>
             </div>
         </div>
-    </div>
+    </li>
 </template>
 
 <style lang="postcss">

@@ -10,7 +10,7 @@ const { removeBodyClass } = useHelpers()
             <ProductFiltersPrice />
             <ProductFiltersCategory />
             <div>
-                <ProductFiltersColor />
+                <!--ProductFiltersColor /-->
 
             </div>
             <ProductFiltersOnSale />

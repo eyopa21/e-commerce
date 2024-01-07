@@ -1,17 +1,5 @@
 <script>
-const items = [
-    [{
-        label: 'Profile',
-        avatar: {
-            src: 'https://avatars.githubusercontent.com/u/739984?v=4'
-        }
-    }, {
-        label: 'Profile',
-        avatar: {
-            src: 'https://avatars.githubusercontent.com/u/739984?v=4'
-        }
-    }]
-]
+
 </script>
 <template>
     <footer class="bg-white p-2">

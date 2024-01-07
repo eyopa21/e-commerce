@@ -16,22 +16,40 @@ onError(err => {
 
 
 <template>
-    <Transition name="fade" mode="out-in">
-        <section class="relative w-full">
-            <TransitionGroup v-if="loading" name="shrink" tag="div" mode="in-out" class="product-grid">
-                <div class="grid grid-cols-4 gap-3">
+    <div>
 
-                    <VueSkeleton v-for="(i, key) in 12" :key="key" />
-                </div>
-            </TransitionGroup>
-            <TransitionGroup v-else name="shrink" tag="div" mode="in-out" class="product-grid">
-                <ProductCard v-for="(i, key) in products" :key="key" :product="i" :index="key" />
-            </TransitionGroup>
-            <Pagination />
 
-        </section>
-        <!--NoProductsFound /-->
-    </Transition>
+        <Transition name="fade" mode="out-in">
+            <section class="relative w-full">
+
+                <ClientOnly>
+                    <div v-if="loading">
+
+                        <TransitionGroup name="shrink" tag="div" mode="in-out" class="product-grid">
+                            <div class="grid grid-cols-4 gap-3">
+
+                                <VueSkeleton v-for="(i, key) in 12" :key="key" />
+                            </div>
+                        </TransitionGroup>
+                    </div>
+
+                    <TransitionGroup v-else name="shrink" tag="div" mode="out-in" class="product-grid">
+
+
+                        <ProductCard v-for="(i, key) in products" :key="key" :product="i" :index="key" />
+
+                    </TransitionGroup>
+                </ClientOnly>
+
+
+
+
+                <VuePagination />
+
+            </section>
+
+        </Transition>
+    </div>
 </template>
 
 <style lang="postcss" scoped>

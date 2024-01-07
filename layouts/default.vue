@@ -24,7 +24,7 @@ const isDark = computed({
                 @click="layout.showCart = false; layout.showSidebar = false"></div>
         </Transition>
         <slot />
-        <LazyNavFooter />
+
 
         <!-- Back to Top & Light/Dark Toggle -->
         <div class="fixed lg:bottom-5 end-5 bottom-18 flex flex-col items-center bg-primary/25 rounded-full z-10">
