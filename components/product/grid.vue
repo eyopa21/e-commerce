@@ -1,14 +1,19 @@
 
 <script setup>
 import query from '../../queries/get/get-products.gql'
+const layout = useLayout();
 const mainData = useData();
 const route = useRoute()
-const isEmpty = ref(false)
+
 const products = ref(computed(() => {
     return mainData.value.products;
 }))
 
-
+const isEmpty = ref(computed(() => {
+    if (layout.value.isFiltering) return false
+    if (products.value?.length) return false
+    return true
+}))
 </script>
 
 
@@ -17,10 +22,13 @@ const products = ref(computed(() => {
 
 
         <Transition name="fade" mode="out-in">
-            <section v-if="mainData.products?.length" class="relative w-full">
+            <section class="relative w-full">
 
-
-                <!--div v-if="loading">
+                <div v-if="isEmpty">
+                    <VueNoProductsFound
+                        message="Could not fecth products from your store. Please check your configuration." />
+                </div>
+                <div v-if="layout.isFiltering">
 
                     <TransitionGroup name="shrink" tag="div" mode="in-out" class="">
                         <div class="grid grid-cols-4 gap-3 product-grid">
@@ -28,17 +36,13 @@ const products = ref(computed(() => {
                             <VueSkeleton v-for="(i, key) in 12" :key="key" />
                         </div>
                     </TransitionGroup>
-                </!--div-->
+                </div>
 
                 <TransitionGroup name="shrink" tag="div" mode="out-in" class="product-grid">
 
                     <ProductCard v-for="(i, key) in products" :key="key" :product="i" :index="key" />
 
                 </TransitionGroup>
-
-
-
-
 
                 <VuePagination v-if="route.name === 'products'" />
 
@@ -47,9 +51,7 @@ const products = ref(computed(() => {
 
 
         </Transition>
-        <div v-if="isEmpty">
-            <VueNoProductsFound message="Could not fecth products from your store. Please check your configuration." />
-        </div>
+
     </div>
 </template>
 

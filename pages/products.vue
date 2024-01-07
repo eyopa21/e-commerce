@@ -38,6 +38,7 @@ useHead({
 
           </div>
         </div>
+
         <ProductGrid />
       </div>
 

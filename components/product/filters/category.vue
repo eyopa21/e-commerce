@@ -1,24 +1,35 @@
 <script setup>
-const isOpen = ref(false)
+const { getFilter, setFilter, filterByCategory, isFiltersActive } = await useFiltering();
 
-const categories = ref(['Clothing', 'Hoodies', 'Clothing', 'Hoodies', 'Clothing', 'Hoodies', 'Clothing', 'Hoodies'])
+const isOpen = ref(false)
+const mainData = useData();
+const categories = ref(mainData.value.categories)
+const selectedTerms = ref(getFilter('category') || []);
+if (getFilter('category')?.length) {
+    console.log("filter from params")
+    filterByCategory(selectedTerms.value);
+}
+const checkboxChanged = async () => {
+
+    filterByCategory(selectedTerms.value);
+}
 </script>
 
 <template>
     <div>
         <div class="cursor-pointer flex font-semibold mt-8 justify-between items-center" @click="isOpen = !isOpen">
-            <span>Category</span>
+            <span>Category </span>
             <Icon name="ion:chevron-down-outline" class="transform transition-all duration-200"
                 :class="isOpen ? 'rotate-180' : ''" />
         </div>
         <Transition name="drop-down">
 
-
             <div v-show="isOpen" class="mt-3 mr-1 max-h-[240px] grid gap-1 overflow-auto custom-scrollbar">
+
                 <div v-for="(i, key) in categories" :key="key" class="flex gap-2 items-center">
-                    <input :id="key" type="checkbox" @change="checkboxChanged" />
+                    <input v-model="selectedTerms" :value="i.name" :id="key" type="checkbox" @change="checkboxChanged" />
                     <label for="color.slug" class="cursor-pointer m-0 text-sm">
-                        <span>{{ i }}</span>
+                        <span>{{ i.name }}</span>
 
                     </label>
                 </div>
