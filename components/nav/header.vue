@@ -25,8 +25,7 @@ const route = useRoute()
                 <NuxtLink to="/categories" :class="{ 'text-primary': route.name.includes('category') }"
                     class="hover:border-b-2 border-primary" active-class="text-primary">Categories
                 </NuxtLink>
-                <NuxtLink to="/contact" class="hover:border-b-2 border-primary" active-class="text-primary">Contact
-                </NuxtLink>
+
 
                 <NuxtLink class="lg:hidden hover:border-b-2 border-primary" to="/wishlist" :prefetch="false"
                     active-class="text-primary">Wishlist</NuxtLink>

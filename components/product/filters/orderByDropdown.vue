@@ -1,5 +1,6 @@
 
 <script setup>
+const { removeBodyClass } = useHelpers()
 const { sort } = useSort();
 const orderby = ref('')
 const order = ref('asc')
@@ -7,6 +8,7 @@ const menus = ['Latest', 'Alphabetically', 'Price']
 const selected = ref(menus[0])
 
 const Sort = (value) => {
+    removeBodyClass();
     sort(value, order.value)
 }
 </script>

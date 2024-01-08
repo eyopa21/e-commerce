@@ -1,7 +1,7 @@
 
 <script setup>
 const { getFilter, setFilter, applyFilter, isFiltersActive } = await useFiltering();
-
+const { removeBodyClass } = useHelpers()
 const isOpen = ref(false)
 const minValue = ref(0)
 const maxValue = ref(10000)
@@ -12,7 +12,7 @@ const activeFilters = ref(getFilter('price'));
 const price = activeFilters.value.length ? ref(activeFilters.value) : ref([0, maxValue.value]);
 
 const handleFilter = () => {
-    console.log("range", price.value)
+    removeBodyClass()
     applyFilter(categoryFilterValue.value, price.value)
 }
 </script>

@@ -1,6 +1,6 @@
 <script setup>
 const { getFilter, setFilter, applyFilter, isFiltersActive } = await useFiltering();
-
+const { removeBodyClass } = useHelpers()
 const isOpen = ref(false)
 const mainData = useData();
 const categories = ref(mainData.value.categories)
@@ -10,6 +10,7 @@ const priceFilterValue = ref(computed(() => {
 const categoryFilterValue = ref(getFilter('category') || []);
 
 const checkboxChanged = async () => {
+    removeBodyClass()
     applyFilter(categoryFilterValue.value, priceFilterValue.value);
 
 }

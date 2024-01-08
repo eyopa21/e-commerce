@@ -17,7 +17,7 @@ const layout = useLayout();
             <NuxtLink to="/">Home</NuxtLink>
             <NuxtLink to="/products">Products</NuxtLink>
             <NuxtLink to="/categories">Category</NuxtLink>
-            <NuxtLink to="/contact">Contact</NuxtLink>
+
 
             <NuxtLink class="lg:hidden" to="/wishlist" :prefetch="false">Wishlist</NuxtLink>
             <NuxtLink class="lg:hidden" to="/my-account" :prefetch="false">My Account</NuxtLink>
