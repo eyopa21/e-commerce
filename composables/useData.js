@@ -3,7 +3,8 @@ export default function () {
     return {
       
       products: '',
-      categories: ''
+      categories: '',
+      agg: null
     };
   });
 }

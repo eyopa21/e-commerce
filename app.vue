@@ -22,23 +22,24 @@ if (error.value) {
   console.log("cat res", data.value)
   mainData.value.categories = data.value?.categories;
   mainData.value.products = data.value?.products;
+  mainData.value.agg = data.value?.products[0].total_count
 
 }
 </script>
 
 <template>
-  <div v-if="!loading" class="flex flex-col min-h-screen mx-2">
-    <ClientOnly>
+  <ClientOnly>
+    <div v-if="!loading" class="flex flex-col min-h-screen mx-2">
       <NuxtLayout>
 
         <NuxtPage />
 
       </NuxtLayout>
-    </ClientOnly>
-  </div>
-  <div v-else class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-25">
-    <VueLoadingIcon />
-  </div>
+    </div>
+    <div v-else class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-25">
+      <VueLoadingIcon />
+    </div>
+  </ClientOnly>
 </template>
 
 <style>

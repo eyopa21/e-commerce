@@ -1,6 +1,7 @@
 import Search_query from '../queries/filters/search.gql'
 
 export function useSearch() {
+    const router = useRouter();
     const layout = useLayout();
     const mainData = useData();
 
@@ -13,7 +14,8 @@ export function useSearch() {
       { fetchPolicy: "cache-and-network" }
       );
       layout.value.isFiltering = loading
-    onResult((res) => {
+      onResult((res) => {
+        router.push('/products')
        mainData.value.products = res.data?.products;
     });
     onError((err) => {

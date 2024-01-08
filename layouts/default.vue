@@ -23,9 +23,15 @@ const isDark = computed({
             <div v-if="layout.showCart || layout.showSidebar" class="bg-black opacity-25 inset-0 z-40 fixed"
                 @click="layout.showCart = false; layout.showSidebar = false"></div>
         </Transition>
-        <slot />
+        <div>
 
+            <slot />
+        </div>
 
+        <Transition>
+
+            <LazyNavFooter />
+        </Transition>
         <!-- Back to Top & Light/Dark Toggle -->
         <!--div class="fixed lg:bottom-5 end-5 bottom-18 flex flex-col items-center bg-primary/25 rounded-full z-10">
             <ClientOnly>

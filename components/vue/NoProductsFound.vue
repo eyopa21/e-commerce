@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const props = defineProps(['message'])
+const router = useRouter();
 </script>
 
 <template>
@@ -11,9 +12,10 @@ const props = defineProps(['message'])
         {{ props.message }} Try adjusting your search or filter to find what you're looking for.
       </p>
       <div>
-        <button class="bg-primary rounded-lg font-bold mt-8 text-center text-white text-sm w-full p-2 px-3 inline-block"
+        <button @click="router.go(-1)"
+          class="bg-primary rounded-lg font-bold mt-8 text-center text-white text-sm w-full p-2 px-3 inline-block"
           title="Clear all filters and search" aria-label="Clear all filters and search">
-          Clear all
+          Get back
         </button>
       </div>
     </div>

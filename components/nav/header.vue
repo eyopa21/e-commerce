@@ -7,7 +7,7 @@ const route = useRoute()
     <header class="sticky top-0 z-40 bg-white shadow-sm shadow-light-500 -ml-2">
         <div class="container flex items-center justify-between py-4">
             <div class="flex items-center">
-                <span class="block md:hidden">
+                <span class="block lg:hidden">
 
                     <Icon name="ion:menu-outline" size="26" class=" mr-4 cursor-pointer"
                         @click="layout.showSidebar = true" />

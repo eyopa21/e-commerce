@@ -1,6 +1,8 @@
 <script setup>
 const { altImage } = useHelpers()
 const props = defineProps(['item'])
+const router = useRouter();
+const layout = useLayout();
 const { removeItem } = useCart();
 
 const remove = async (id) => {
@@ -14,19 +16,27 @@ const remove = async (id) => {
 
 const quantity = ref(props.item.quantity)
 
+
+const navigate = () => {
+    router.push(`/product/${props.item.product.id}`)
+    layout.value.showCart = false
+
+}
 </script>
 
 <template>
     <div>
         <li class="flex items-center gap-3">
-            <NuxtLink :to="`/product/${props.item.product.id}`">
+            <NuxtLink @click="navigate()">
 
                 <NuxtImg provider="cloudinary" :src="props.item.product.images[0]?.split('upload')[1] || altImage"
                     width="64" height="64" class="w-16 h-16 rounded-md" alt="alt"
                     title="productType.image?.title || productType.name" loading="lazy" />
             </NuxtLink>
             <div class="flex-1">
-                <NuxtLink class="leading-tight" to="/productSlug"> {{ props.item.product.title }}</NuxtLink>
+                <NuxtLink @click="navigate()" class="leading-tight"> {{
+                    props.item.product.title }}
+                </NuxtLink>
                 <div class="mt-1 text-xs">
                     <div class="flex">
 

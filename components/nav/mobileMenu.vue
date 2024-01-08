@@ -13,7 +13,7 @@ const layout = useLayout();
 
 
         <div class="mt-8 text-center">Menu</div>
-        <nav class="m-4 grid p-4 text-gray-500 gap-6">
+        <nav @click="layout.showSidebar = false" class="m-4 grid p-4 text-gray-500 gap-6">
             <NuxtLink to="/">Home</NuxtLink>
             <NuxtLink to="/products">Products</NuxtLink>
             <NuxtLink to="/categories">Category</NuxtLink>

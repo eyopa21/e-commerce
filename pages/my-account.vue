@@ -29,7 +29,7 @@ const logoutUser = async () => {
           class="flex items-center gap-4 p-3 px-4 rounded-lg hover:bg-white hover:text-primary"
           :class="{ active: activeTab == 'my-details' }">
           <Icon name="ion:information-circle-outline" size="22" />
-          My details{{ isPending }}
+          My details
         </NuxtLink>
         <NuxtLink to="/my-account?tab=orders"
           class="flex items-center gap-4 p-3 px-4 rounded-lg hover:bg-white hover:text-primary"

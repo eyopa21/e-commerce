@@ -30,11 +30,11 @@ const isEmpty = ref(computed(() => {
                 </div>
                 <div v-if="layout.isFiltering">
 
-                    <TransitionGroup name="shrink" tag="div" mode="in-out" class="">
-                        <div class="grid grid-cols-4 gap-3 product-grid">
+                    <TransitionGroup name="shrink" tag="div" mode="in-out" class=" product-grid">
 
-                            <VueSkeleton v-for="(i, key) in 12" :key="key" />
-                        </div>
+
+                        <VueSkeleton v-for="(i, key) in 12" :key="key" />
+
                     </TransitionGroup>
                 </div>
 
@@ -44,7 +44,7 @@ const isEmpty = ref(computed(() => {
 
                 </TransitionGroup>
 
-                <VuePagination v-if="route.name === 'products'" />
+                <!--VuePagination v-if="route.name === 'products'" /-->
 
             </section>
 

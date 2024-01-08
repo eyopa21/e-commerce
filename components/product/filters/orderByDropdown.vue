@@ -3,8 +3,8 @@
 const { sort } = useSort();
 const orderby = ref('')
 const order = ref('asc')
-const people = ['Latest', 'Alphabetically', 'Price']
-const selected = ref(people[0])
+const menus = ['Latest', 'Alphabetically', 'Price']
+const selected = ref(menus[0])
 
 const Sort = (value) => {
     sort(value, order.value)
@@ -23,8 +23,8 @@ const Sort = (value) => {
                     class="transition-transform transform transform-origin-center" />
             </button>
         </div>
-        <USelectMenu v-slot="{ open }" v-model="selected" :options="people" @change="Sort(selected)"
-            class="w-full md:w-48 font-normal z-50">
+        <USelectMenu v-slot="{ open }" v-model="selected" :options="menus" @change="Sort(selected)"
+            class="w-full md:w-48 font-normal z-30">
             <UButton color="gray" class="flex-1 justify-between py-2 rounded-l-none text-normal">
                 {{ selected }}
 

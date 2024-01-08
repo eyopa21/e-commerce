@@ -35,7 +35,7 @@ function saveChanges() {
   <UForm v-if="currentUser.currentUser" :schema="UserAccountValidationSchema" :state="State"
     class="bg-white rounded-lg shadow" @submit="saveChanges()">
     <div class="grid gap-6 p-8 md:grid-cols-2">
-      {{ State }}
+
       <h3 class="text-xl font-semibold col-span-full">Personal Info
         <span class="text-xs font-normal text-primary">({{ currentUser.currentUser.email }})</span>
       </h3>

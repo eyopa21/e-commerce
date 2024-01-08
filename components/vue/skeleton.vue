@@ -1,5 +1,5 @@
 <template>
-    <div role="status" class=" w-52 p-1   rounded animate-pulse ">
+    <div role="status" class="w-full  lg:w-52 p-1   rounded animate-pulse ">
         <div class="flex items-center justify-center  h-56 mb-4 bg-gray-200 rounded dark:bg-gray-700">
             <svg class="w-10 h-10 text-gray-300 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor" viewBox="0 0 16 20">
