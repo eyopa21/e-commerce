@@ -88,7 +88,8 @@ const add = (productID, quantity) => {
             <div class="flex items-center gap-2">
               <span class="text-gray-400">Category:</span>
               <div class="product-categories">
-                <NuxtLink v-for="i in 2" :key="i" :to="`/product-category/${i}`" class="hover:text-primary" :title="i">
+                <NuxtLink v-for="i in theProduct[0].categories" :key="i" :to="`/product-category/${i}`"
+                  class="hover:text-primary" :title="i">
                   {{
                     i }}<span class="comma">, </span></NuxtLink>
               </div>

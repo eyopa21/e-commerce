@@ -1,10 +1,21 @@
 <script setup>
-const { removeBodyClass, toggleBodyClass } = useHelpers();
-const layout = useLayout();
 
-onBeforeUnmount(() => {
-  removeBodyClass('show-filters');
-});
+const layout = useLayout();
+const route = useRoute()
+const mainData = useData();
+const filteredProducts = ref([])
+
+mainData.value.products =
+
+  mainData.value.products?.filter(product => {
+    console.log(product.categories.includes(route.params.slug))
+    return product.categories.includes(route.params.slug)
+  })
+
+
+
+
+
 
 useHead({
   title: 'Products',
@@ -19,6 +30,8 @@ useHead({
     <div class="w-full">
       <div class="flex items-center justify-between w-full gap-4 mt-8 md:gap-8">
         <ProductResultCount />
+
+
         <ProductFiltersOrderByDropdown class="hidden md:inline-flex" />
 
         <div class="md:hidden">

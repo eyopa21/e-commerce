@@ -1,5 +1,5 @@
 <template>
-    <span class="red-badge">22 %</span>
+    <span class="red-badge">New</span>
 </template>
 
 <style lang="postcss" scoped>
