@@ -1,6 +1,6 @@
 <script setup>
 const { removeBodyClass } = useHelpers()
-const { getFilter, setFilter, applyFilter, isFiltersActive } = await useFiltering();
+const { getFilter, applyFilter, isFiltersActive } = useFiltering();
 
 const categoryFilterValue = ref(computed(() => {
     return getFilter('category');

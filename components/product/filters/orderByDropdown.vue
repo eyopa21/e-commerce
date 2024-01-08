@@ -1,23 +1,40 @@
 
 <script setup>
+const { sort } = useSort();
 const orderby = ref('')
-const order = ref('')
+const order = ref('asc')
+const people = ['Latest', 'Alphabetically', 'Price']
+const selected = ref(people[0])
+
+const Sort = (value) => {
+    sort(value, order.value)
+}
 </script>
 
 <template>
-    <div class="inline-flex ml-auto -space-x-px shadow-sm rounded-m isolate">
-        <button
-            class="relative inline-flex items-center p-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50 focus:z-20"
-            aria-label="Sort" @click="order = order === 'ASC' ? 'DESC' : 'ASC'">
-            <Icon name="ion:filter-outline" size="18" :class="order === 'ASC' ? 'rotate-180' : ''"
-                class="transition-transform transform transform-origin-center" />
-        </button>
-        <select v-model="orderby" class="bg-white rounded-l-none" aria-label="Order by">
-            <option value="date">latest</option>
-            <option value="alphabetically">Alphabetically</option>
-            <option value="price">Price</option>
-            <option value="rating">Rating</option>
-            <option value="discount">Discount</option>
-        </select>
+    <div class="flex">
+
+
+        <div class="inline-flex ml-auto -space-x-px shadow-sm rounded-m isolate">
+            <button
+                class="relative inline-flex items-center p-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50 focus:z-20"
+                aria-label="Sort" @click="order = order === 'asc' ? 'desc' : 'asc'; Sort(selected)">
+                <Icon name="ion:filter-outline" size="18" :class="order === 'asc' ? 'rotate-180' : ''"
+                    class="transition-transform transform transform-origin-center" />
+            </button>
+        </div>
+        <USelectMenu v-slot="{ open }" v-model="selected" :options="people" @change="Sort(selected)"
+            class="w-full md:w-48 font-normal z-50">
+            <UButton color="gray" class="flex-1 justify-between py-2 rounded-l-none text-normal">
+                {{ selected }}
+
+                <UIcon name="i-heroicons-chevron-right-20-solid"
+                    class="w-5 h-5 transition-transform text-gray-400 dark:text-gray-500"
+                    :class="[open && 'transform rotate-90']" />
+            </UButton>
+        </USelectMenu>
     </div>
 </template>
+
+
+

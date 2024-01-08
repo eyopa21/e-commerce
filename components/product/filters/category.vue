@@ -10,8 +10,6 @@ const priceFilterValue = ref(computed(() => {
 const categoryFilterValue = ref(getFilter('category') || []);
 
 const checkboxChanged = async () => {
-
-
     applyFilter(categoryFilterValue.value, priceFilterValue.value);
 
 }

@@ -1,7 +1,4 @@
-
-
-import filter_query from '../queries/filters/filter.gql'
-
+import filter_query from "../queries/filters/filter.gql";
 
 export function useFiltering() {
   const route = useRoute();
@@ -9,33 +6,48 @@ export function useFiltering() {
   const runtimeConfig = useRuntimeConfig();
   const layout = useLayout();
   const mainData = useData();
-  const filterQuery = useState('filter', () => '');
+  const filterQuery = useState("filter", () => "");
 
   filterQuery.value = route.query.filter;
 
   function getFilter(filterName) {
-    return (filterQuery.value?.split(`${filterName}[`)[1]?.split(']')[0]?.split(',')) || [];
+    return (
+      filterQuery.value
+        ?.split(`${filterName}[`)[1]
+        ?.split("]")[0]
+        ?.split(",") || []
+    );
   }
 
   function setFilter(filterName, filterValue) {
-    let newFilterQuery = filterQuery.value || '';
-console.log("filter query", filterQuery.value)
+    let newFilterQuery = filterQuery.value || "";
+    console.log("filter query", filterQuery.value);
     if (!filterQuery.value || !filterQuery.value.includes(filterName)) {
-      newFilterQuery = filterQuery.value ? `${filterQuery.value},${filterName}[${filterValue}]` : `${filterName}[${filterValue}]`;
+      newFilterQuery = filterQuery.value
+        ? `${filterQuery.value},${filterName}[${filterValue}]`
+        : `${filterName}[${filterValue}]`;
     } else {
       newFilterQuery = !filterValue.length
-        ? filterQuery.value.replace(`${filterName}[${getFilter(filterName)}]`, '')
-        : filterQuery.value.replace(`${filterName}[${getFilter(filterName)}]`, `${filterName}[${filterValue}]`);
+        ? filterQuery.value.replace(
+            `${filterName}[${getFilter(filterName)}]`,
+            ""
+          )
+        : filterQuery.value.replace(
+            `${filterName}[${getFilter(filterName)}]`,
+            `${filterName}[${filterValue}]`
+          );
     }
 
-    newFilterQuery = newFilterQuery.replace(/^,/, '').replace(/,$/, '');
-    newFilterQuery = newFilterQuery.replace(/,{2,}/g, ',');
+    newFilterQuery = newFilterQuery.replace(/^,/, "").replace(/,$/, "");
+    newFilterQuery = newFilterQuery.replace(/,{2,}/g, ",");
 
     filterQuery.value = newFilterQuery;
 
     router.push({ query: { ...route.query, filter: newFilterQuery } });
 
-    const path = route.path.includes('/page/') ? route.path.split('/page/')[0] : route.path;
+    const path = route.path.includes("/page/")
+      ? route.path.split("/page/")[0]
+      : route.path;
 
     if (!newFilterQuery) {
       router.push({ path, query: { ...route.query, filter: undefined } });
@@ -48,42 +60,42 @@ console.log("filter query", filterQuery.value)
     }, 50);
   }
 
-  function resetFilter() {
+  async function resetFilter() {
     const { scrollToTop } = useHelpers();
-    filterQuery.value = '';
-    router.push({ query: { ...route.query, filter: undefined } });
+    filterQuery.value = "";
 
-    setTimeout(() => {
-      // updateProductList();
+    setTimeout(async () => {
+      await applyFilter([], []);
+      router.push({ query: { ...route.query, filter: undefined } });
+      
       scrollToTop();
     }, 50);
   }
 
-    const isFiltersActive = computed(() => !!filterQuery.value);
+  const isFiltersActive = computed(() => !!filterQuery.value);
 
   async function applyFilter(categoryValue, priceValue) {
-    console.log("category value", categoryValue)
-      console.log("price value",priceValue )
-
     try {
-  if(!categoryValue?.length) setFilter('category', [])
-      if(categoryValue?.length) setFilter('category', categoryValue)
-      if(priceValue?.length)  setFilter('price', priceValue);
-   
-      const { onResult, onError, loading } =  useQuery(filter_query, {categories: categoryValue, max: priceValue[1], min: priceValue[0]})
-      layout.value.isFiltering = loading
-      onResult(res => {
-        console.log("result", res.data)
+      if (!categoryValue?.length) setFilter("category", []);
+      if (categoryValue?.length) setFilter("category", categoryValue);
+      if (priceValue?.length) setFilter("price", priceValue);
+
+      const { onResult, onError, loading } = useQuery(filter_query, {
+        categories: categoryValue,
+        max: priceValue[1],
+        min: priceValue[0],
+      });
+      layout.value.isFiltering = loading;
+      onResult((res) => {
         mainData.value.products = res.data?.products;
-      })
-      onError(err => {
-        console.log("erororor", err)
-      })
+      });
+      onError((err) => {
+        console.log("erororor", err);
+      });
     } catch (error) {
-      console.log("filter by category error", error)
+      console.log("filter by category error", error);
     }
-}
+  }
 
-
-  return {applyFilter, getFilter, setFilter, resetFilter, isFiltersActive };
+  return { applyFilter, getFilter, setFilter, resetFilter, isFiltersActive };
 }
