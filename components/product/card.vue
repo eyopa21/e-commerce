@@ -10,8 +10,7 @@ const imgHeight = Math.round(imgWidth * 1.125);
         <NuxtLink :to="`/product/${props.product.id}`" :title="props.product.title">
             <VueSaleBadge class="absolute top-2 right-2" />
 
-            <NuxtImg provider="cloudinary" :width="imgWidth" :height="imgHeight"
-                :src="props.product.images[0]?.split('upload')[1] ? props.product.images[0]?.split('upload')[1] : '/placeholder.jpg'"
+            <NuxtImg :width="imgWidth" :height="imgHeight" :src="props.product.images[0] || '/placeholder.jpg'"
                 alt="image product" :title="props.product.name" :loading="props.index <= 3 ? 'eager' : 'lazy'" fit="outside"
                 format="webp" densities="x1 x2" class="object-cover" />
         </NuxtLink>
