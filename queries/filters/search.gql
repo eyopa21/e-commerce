@@ -1,0 +1,35 @@
+query search($search: String!) {
+  products(
+    where: {
+      _or: [
+        { title: { _ilike: $search } }
+        { subtitle: { _ilike: $search } }
+        { description: { _ilike: $search } }
+       
+        { seller: { user_name: { _ilike: $search } } }
+        { seller: { shop_name: { _ilike: $search } } }
+      ]
+    }
+  ) {
+    id
+    title
+    subtitle
+    price
+    description
+    images
+    amount_in_stock
+    categories
+    created_at
+    updated_at
+    seller {
+      id
+      email
+      last_name
+      phone_number
+      first_name
+      user_name
+      shop_type
+      shop_name
+    }
+}
+}
