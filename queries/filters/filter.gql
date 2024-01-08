@@ -1,5 +1,11 @@
-query myQuery($categories: [String!]!) {
-  products(where: { categories: { _contains: $categories } }) {
+query myQuery($categories: [String!]!, $max: Int = 100000, $min: Int = 0)
+@cached {
+  products(
+    where: {
+      categories: { _contains: $categories }
+      _and: { price: { _gte: $min, _lte: $max } }
+    }
+  ) {
     id
     title
     subtitle

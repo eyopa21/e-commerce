@@ -1,17 +1,19 @@
 <script setup>
-const { getFilter, setFilter, filterByCategory, isFiltersActive } = await useFiltering();
+const { getFilter, setFilter, applyFilter, isFiltersActive } = await useFiltering();
 
 const isOpen = ref(false)
 const mainData = useData();
 const categories = ref(mainData.value.categories)
-const selectedTerms = ref(getFilter('category') || []);
-if (getFilter('category')?.length) {
-    console.log("filter from params")
-    filterByCategory(selectedTerms.value);
-}
+const priceFilterValue = ref(computed(() => {
+    return getFilter('price');
+}));
+const categoryFilterValue = ref(getFilter('category') || []);
+
 const checkboxChanged = async () => {
 
-    filterByCategory(selectedTerms.value);
+
+    applyFilter(categoryFilterValue.value, priceFilterValue.value);
+
 }
 </script>
 
@@ -27,7 +29,8 @@ const checkboxChanged = async () => {
             <div v-show="isOpen" class="mt-3 mr-1 max-h-[240px] grid gap-1 overflow-auto custom-scrollbar">
 
                 <div v-for="(i, key) in categories" :key="key" class="flex gap-2 items-center">
-                    <input v-model="selectedTerms" :value="i.name" :id="key" type="checkbox" @change="checkboxChanged" />
+                    <input v-model="categoryFilterValue" :value="i.name" :id="key" type="checkbox"
+                        @change="checkboxChanged" />
                     <label for="color.slug" class="cursor-pointer m-0 text-sm">
                         <span>{{ i.name }}</span>
 

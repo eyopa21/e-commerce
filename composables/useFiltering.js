@@ -1,6 +1,6 @@
 
 
-import filter_by_category_query from '../queries/filters/filter_by_category.gql'
+import filter_query from '../queries/filters/filter.gql'
 
 
 export function useFiltering() {
@@ -61,12 +61,16 @@ console.log("filter query", filterQuery.value)
 
     const isFiltersActive = computed(() => !!filterQuery.value);
 
-  async function filterByCategory(value) {
+  async function applyFilter(categoryValue, priceValue) {
+    console.log("category value", categoryValue)
+      console.log("price value",priceValue )
+
     try {
-      
-      await setFilter('category', value)
-      console.log("vall", value)
-      const { onResult, onError, loading } =  useQuery(filter_by_category_query, {categories: value})
+  if(!categoryValue?.length) setFilter('category', [])
+      if(categoryValue?.length) setFilter('category', categoryValue)
+      if(priceValue?.length)  setFilter('price', priceValue);
+   
+      const { onResult, onError, loading } =  useQuery(filter_query, {categories: categoryValue, max: priceValue[1], min: priceValue[0]})
       layout.value.isFiltering = loading
       onResult(res => {
         console.log("result", res.data)
@@ -81,5 +85,5 @@ console.log("filter query", filterQuery.value)
 }
 
 
-  return {filterByCategory, getFilter, setFilter, resetFilter, isFiltersActive };
+  return {applyFilter, getFilter, setFilter, resetFilter, isFiltersActive };
 }

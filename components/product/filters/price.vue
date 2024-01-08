@@ -1,11 +1,20 @@
 
 <script setup>
-const emit = defineEmits(['range'])
-const isOpen = ref(false)
-const minValue = ref(100)
-const maxValue = ref(999)
+const { getFilter, setFilter, applyFilter, isFiltersActive } = await useFiltering();
 
-emit('range', minValue, maxValue)
+const isOpen = ref(false)
+const minValue = ref(0)
+const maxValue = ref(10000)
+const categoryFilterValue = ref(computed(() => {
+    return getFilter('category');
+}));
+const activeFilters = ref(getFilter('price'));
+const price = activeFilters.value.length ? ref(activeFilters.value) : ref([0, maxValue.value]);
+
+const handleFilter = () => {
+    console.log("range", price.value)
+    applyFilter(categoryFilterValue.value, price.value)
+}
 </script>
 
 <template>
@@ -19,28 +28,27 @@ emit('range', minValue, maxValue)
         <Transition name="drop-down" mode="out-in">
             <div v-show="isOpen" class="mt-3 space-y-1">
 
-
+                {{ price }} {{ categoryFilterValue }}
                 <div class="flex relative items-center">
-                    <input v-model="minValue" id="price-from"
+                    <input v-model="price[0]" id="price-from"
                         class="bg-white border rounded-lg max-w-full border-gray-200 leading-none w-auto p-2 pl-6 md:text-sm"
-                        type="number" placeholder="From" min="0" />
+                        type="number" placeholder="From" min="0" @change="handleFilter" />
                     <label for="price-from" class="leading-none px-2 text-gray-400 absolute">$</label>
                 </div>
                 <div class="p-1">
-                    <URange v-model="minValue" :min="50" :max="500" name="range" />
+                    <URange v-model="price[0]" :min="0" :max="500" name="range" @change="handleFilter" />
                 </div>
-
 
 
 
                 <div class="flex relative items-center">
-                    <input v-model="maxValue" id="price-to"
+                    <input v-model="price[1]" id="price-to"
                         class="bg-white border rounded-lg max-w-full border-gray-200 leading-none w-auto p-2 pl-6 md:text-sm"
-                        type="number" placeholder="Up to" min="1" />
+                        type="number" placeholder="Up to" min="1" @change="handleFilter" />
                     <label for="price-to" class="leading-none px-2 text-gray-400 absolute">$</label>
                 </div>
                 <div class="p-1">
-                    <URange v-model="maxValue" name="range" :min="500" :max="999" />
+                    <URange v-model="price[1]" name="range" :min="500" :max="999" @change="handleFilter" />
                 </div>
             </div>
         </Transition>

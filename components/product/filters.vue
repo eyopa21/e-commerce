@@ -1,9 +1,24 @@
 <script setup>
 const { removeBodyClass } = useHelpers()
+const { getFilter, setFilter, applyFilter, isFiltersActive } = await useFiltering();
+
+const categoryFilterValue = ref(computed(() => {
+    return getFilter('category');
+}));
+const priceFilterValue = ref(computed(() => {
+    return getFilter('price');
+}));
+
+if (getFilter('price')?.length || getFilter('category')?.length) {
+    console.log("filter from params")
+    applyFilter(categoryFilterValue.value, priceFilterValue.value)
+}
+
+
 </script>
 
 <template>
-    <aside id="filters" class="pl-4">
+    <aside id="filters" class="pl-4 relative h-96">
 
         <ProductFiltersOrderByDropdown class="block w-full md:hidden" />
         <div class="relative z-30 grid mb-12 space-y-8 divide-y">
@@ -13,8 +28,8 @@ const { removeBodyClass } = useHelpers()
                 <!--ProductFiltersColor /-->
 
             </div>
-            <ProductFiltersOnSale />
-            <LazyProductFiltersRating />
+            <!--ProductFiltersOnSale />
+            <LazyProductFiltersRating /-->
             <LazyProductFiltersResetFilterButton />
         </div>
     </aside>
