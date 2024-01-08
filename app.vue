@@ -1,6 +1,7 @@
 <script setup>
 import query from '../queries/get/get-products&categories.gql'
 const currentUser = useCurrentUser();
+const layout = useLayout()
 const mainData = useData();
 const { myAuth } = useAuth()
 const { getCart } = useCart()
@@ -17,7 +18,9 @@ onMounted(async () => {
 })
 const { data, error } = useLazyAsyncQuery(query);
 if (error.value) {
+  lay
   console.log("cat eror", error.value)
+  layout.value.showAlert = { error: true, message: error.value }
 } else {
   console.log("cat res", data.value)
   mainData.value.categories = data.value?.categories;
@@ -39,6 +42,10 @@ if (error.value) {
     <div v-else class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-25">
       <VueLoadingIcon />
     </div>
+    <transition enter-from-class="translate-x-[20px] opacity-0" leave-to-class="translate-x-[20px] opacity-0"
+      enter-active-class="transition-all duration-[0.3s] ease-out" leave-active-class="transition-all duration-[0.8s]">
+      <VueToast v-if="layout.showAlert.message !== ''" />
+    </transition>
   </ClientOnly>
 </template>
 

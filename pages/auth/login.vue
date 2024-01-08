@@ -37,6 +37,7 @@ const login = async () => {
             router.push('/')
         } catch (err) {
             console.log(err, "err")
+            layout.value.showAlert = { error: true, message: err }
         }
 
     })

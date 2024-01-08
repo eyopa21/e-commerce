@@ -7,7 +7,12 @@ export default function() {
            showSearch: false,
             showFilters: false,
             showAlert: false, 
-            isFiltering: false
+            isFiltering: false,
+            showAlert: {
+                message: '',
+                error: true,
+                warning: false
+            }
 
         }
     })

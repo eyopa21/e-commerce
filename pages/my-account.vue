@@ -1,6 +1,7 @@
 <script setup>
 const isLoggedIn = useCookie('isLoggedIn')
 const route = useRoute();
+const layout = useLayout();
 const { logout, isPending } = useAuth();
 const activeTab = computed(() => route.query.tab || 'my-details');
 const { onLogin, onLogout, getToken } = useApollo()
@@ -12,6 +13,7 @@ const logoutUser = async () => {
     await logout();
   } catch (error) {
     console.log("logout eroror", error)
+    layout.value.showAlert = { error: true, message: error }
   }
 
 
