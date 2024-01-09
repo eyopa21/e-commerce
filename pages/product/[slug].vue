@@ -21,7 +21,8 @@ const add = (productID, quantity) => {
 
     addToCart(productID, quantity)
   } else {
-    layout.value.showAlert = true
+    console.log("plsea login first")
+    layout.value.showModal = true
   }
 }
 
@@ -29,6 +30,11 @@ const add = (productID, quantity) => {
 
 <template>
   <div>
+    <div v-if="layout.showModal">
+
+      <VueAlert
+        :message="{ type: 'auth', title: 'Authentication error', description: 'PLease login first to access this service!!' }" />
+    </div>
 
 
     <div v-if="theProduct?.length" class="container relative py-6 xl:max-w-7xl">
@@ -102,8 +108,6 @@ const add = (productID, quantity) => {
           </div>
         </div>
       </div>
-      <VueAlert
-        :message="{ type: 'auth', title: 'Authentication error', description: 'PLease login first to access this service!!' }" />
     </div>
     <div v-else>
       <VueNoProductsFound />

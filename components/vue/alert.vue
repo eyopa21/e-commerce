@@ -6,15 +6,15 @@ const props = defineProps(['message'])
 
 const proceedToLogin = () => {
     router.push('/auth/login')
-    layout.value.showAlert = false;
+    layout.value.showModal = false;
 }
 
 </script>
 
 <template>
-    <div>
+    <div v-if="props.message">
 
-        <UModal v-model="layout.showAlert" prevent-close>
+        <UModal v-model="layout.showModal" prevent-close>
             <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
                 <template #header>
                     <div class="flex items-center justify-between">
@@ -22,7 +22,7 @@ const proceedToLogin = () => {
                             Alert
                         </h3>
                         <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1"
-                            @click="layout.showAlert = false" />
+                            @click="layout.showModal = false" />
                     </div>
                 </template>
 
@@ -33,11 +33,11 @@ const proceedToLogin = () => {
                     <div
                         class="w-full max-w-md transform overflow-hidden rounded-2xl  text-left align-middle  transition-all">
                         <div class="text-lg font-medium leading-6 text-gray-900">
-                            {{ props.message.title }}
+                            {{ props.message?.title }}
                         </div>
                         <div class="mt-2">
                             <p class="text-sm text-gray-500">
-                                {{ props.message.description }}
+                                {{ props.message?.description }}
                             </p>
                         </div>
 
@@ -56,4 +56,3 @@ const proceedToLogin = () => {
 
     </div>
 </template>
-

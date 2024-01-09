@@ -83,7 +83,7 @@ export function useCart() {
       await getCart()
     } catch (err) {
       console.log("reomve error", err)
-      throw new Error("Cannot remove cart");
+      throw new Error("Cannot add to cart");
     }
   }
 

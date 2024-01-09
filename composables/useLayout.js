@@ -4,9 +4,9 @@ export default function() {
            
             showSidebar: false,
             showCart: false,
-           showSearch: false,
+            showSearch: false,
             showFilters: false,
-            showAlert: false, 
+            showModal: false, 
             isFiltering: false,
             showAlert: {
                 message: '',

@@ -13,6 +13,7 @@ const isDark = computed({
 <template>
     <div>
         <LazyNavHeader />
+        <VueAlert />
         <Transition name="slide-from-right">
             <Cart v-if="layout.showCart" />
         </Transition>

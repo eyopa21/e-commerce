@@ -17,12 +17,12 @@
 
                 </div>
                 <div class="w-3/7 lg:w-auto">
-                    <div class="mb-1 font-semibold">Information</div>
+                    <div class="mb-1 font-semibold">Links</div>
                     <div class="text-sm">
-                        <a class="py-1.5 block" target="_blank">About</a>
-                        <a href="/" class="py-1.5 block">Careers</a>
-                        <a href="/" class="py-1.5 block">Press</a>
-                        <a class="py-1.5 block" rel="noreferrer" target="_blank">FAQ's</a>
+                        <NuxtLink to="/" class="py-1.5 block" target="_blank">Home</NuxtLink>
+                        <NuxtLink to="/products" class="py-1.5 block">Products</NuxtLink>
+                        <NuxtLink to="/categories" class="py-1.5 block">Categories</NuxtLink>
+                        <NuxtLink class="py-1.5 block" rel="noreferrer">FAQ's</NuxtLink>
                     </div>
                 </div>
                 <div class="w-3/7 lg:w-auto">
