@@ -64,7 +64,7 @@ const buttonText = computed(() => {
 <template>
     <div class="max-w-lg mx-auto my-16 min-h-[600px]">
         <div class="flex flex-col items-center">
-            <h1 class="mb-6 scale-125 text-4xl">LOGO</h1>
+            <h1 class="mb-6 scale-125 text-4xl"><img src="/public/gebeya.png" alt="logo" class="w-48 h-24 rounded-lg"></h1>
             <h1 class="text-xl font-semibold lg:text-3xl">Login To account</h1>
             <div class="my-2 text-center">
                 No account?

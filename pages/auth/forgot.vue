@@ -19,7 +19,7 @@ const resetPassword = async () => {
 <template>
     <div class="max-w-lg mx-auto my-16 min-h-[600px] lg:my-24">
         <div class="flex flex-col items-center">
-            <h1 class="mb-6 scale-125 text-4xl">LOGO</h1>
+            <h1 class="mb-6 scale-125 text-4xl"><img src="/public/gebeya.png" alt="logo" class="w-48 h-24 rounded-lg"></h1>
             <h1 class="text-xl font-semibold lg:text-3xl text-primary">Reset Your password</h1>
 
 
@@ -40,7 +40,7 @@ const resetPassword = async () => {
 
 
             <button type="submit" class="flex items-center justify-center gap-4 mt-4 text-lg">
-                <VueLoadingIcon stroke="4" size="16" color="#fff" />
+                <!--VueLoadingIcon stroke="4" size="16" color="#fff" /-->
                 <span>Reset Password</span>
             </button>
         </UForm>
