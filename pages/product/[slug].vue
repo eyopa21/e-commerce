@@ -83,7 +83,7 @@ const add = (productID, quantity) => {
           <form @submit.prevent="add(theProduct[0].id, quantity)">
 
             <div
-              class="fixed bottom-0 left-0 z-10 flex items-center w-full gap-4 p-4 mt-12 bg-white md:static md:bg-transparent bg-opacity-90 md:p-0">
+              class="fixed bottom-0 left-0 z-50 flex items-center w-full gap-4 p-4 mt-12 bg-white md:static md:bg-transparent bg-opacity-90 md:p-0">
               <input v-model="quantity" type="number" min="1" aria-label="Quantity"
                 class="bg-white border rounded-lg flex text-left p-2.5 w-20 gap-4 items-center justify-center focus:outline-none" />
               <VueButtonAddToCart :loading="cartLoading" class="flex-1 w-full md:max-w-xs" />

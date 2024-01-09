@@ -4,6 +4,7 @@ import remove_query from "../queries/delete/remove-cart-item.gql";
 import add_to_cart_query from "../queries/insert/add-to-cart.gql";
 export function useCart() {
   const nuxtApp = useNuxtApp();
+  const layout = useLayout();
   const currentUser = useCurrentUser();
   const loading = useState("cartLoading", () => false);
   //const { result, error, execute } =  useLazyAsyncQuery(query, {user_id: currentUser.value.id});
@@ -36,6 +37,7 @@ export function useCart() {
     const result = await load()
     if (error.value) {
       console.log("cart fetch error", error.value);
+     
       throw new Error("Cannot fetch cart");
     } else {
 
@@ -56,6 +58,7 @@ export function useCart() {
       await getCart()
     } catch (err) {
       console.log(err);
+      
       throw new Error("Cannot Clear cart");
     }
   }
@@ -83,6 +86,7 @@ export function useCart() {
       await getCart()
     } catch (err) {
       console.log("reomve error", err)
+      
       throw new Error("Cannot add to cart");
     }
   }

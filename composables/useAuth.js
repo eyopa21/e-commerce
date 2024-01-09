@@ -48,34 +48,14 @@ export const useAuth = () => {
       }
     };
 
-    const updateCustomer = (payload) => {
-      const sessionToken = payload?.sessionToken;
-      if (sessionToken) {
-        useGqlHeaders({ 'woocommerce-session': `Session ${sessionToken}` });
-        const newToken = useCookie('woocommerce-session');
-        newToken.value = sessionToken;
-      }
-      customer.value = payload;
-      isPending.value = false;
-    };
+  
 
     const updateViewer = (payload) => {
       viewer.value = payload;
       isPending.value = false;
     };
 
-    const sendResetPasswordEmail = async (email) => {
-      try {
-        const { sendPasswordResetEmail } = await GqlResetPasswordEmail({ username: email });
-        if (sendPasswordResetEmail?.success) {
-          return { success: true, error: null };
-        }
-        return { success: false, error: 'There was an error sending the reset password email. Please try again later.' };
-      } catch (error) {
-        const gqlError = error?.gqlErrors?.[0];
-        return { success: false, error: gqlError?.message };
-      }
-    };
+   
 
     const getOrders = async () => {
       try {
@@ -153,11 +133,11 @@ export const useAuth = () => {
       isPending,
       orders,
       loginUser,
-      updateCustomer,
-      updateViewer,
+      
+    
      
       registerUser,
-      sendResetPasswordEmail,
+    
       getOrders,
       myAuth,
       user, 

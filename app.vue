@@ -10,15 +10,16 @@ onMounted(async () => {
   try {
     const res = await myAuth()
     console.log("tokichaw", res)
+    layout.value.showAlert = { error: false, message: res }
     loading.value = false;
   } catch (err) {
     console.log("tokierror", err)
+    layout.value.showAlert = { error: true, message: err.message }
     loading.value = false;
   }
 })
 const { data, error } = useLazyAsyncQuery(query);
 if (error.value) {
-  lay
   console.log("cat eror", error.value)
   layout.value.showAlert = { error: true, message: error.value }
 } else {

@@ -13,9 +13,7 @@ const TOKEN = useCookie('token', {
     httpOnly: true
 });
 
-const formView = ref('login');
-const message = ref('');
-const errorMessage = ref('');
+
 const loginState = reactive({
     email: '',
     password: ''
@@ -28,36 +26,28 @@ const login = async () => {
     console.log("login")
     Login({ email: loginState.email, password: loginState.password })
     onDone(async res => {
-        console.log(res)
+
         await onLogin(res.data.Login.token)
 
         try {
             const res = await myAuth()
-            console.log("tokichaw", res)
+            layout.value.showAlert = { error: false, message: "Login success" }
             router.push('/')
         } catch (err) {
+            onLogout()
             console.log(err, "err")
-            layout.value.showAlert = { error: true, message: err }
+            layout.value.showAlert = { error: true, message: "Cannot login, Please try again" }
         }
 
     })
     onError(err => {
-        console.log(err)
+        onLogout()
+        console.log(err, "err")
+        layout.value.showAlert = { error: true, message: "Cannot login, Please try again" }
     })
 };
 
 
-
-const buttonText = computed(() => {
-    if (formView.value === 'login') {
-        return 'Login'
-    } else if (formView.value === 'register') {
-        return 'Register'
-    } else if (formView.value === 'forgotPassword') {
-        return 'ResetPassword'
-    }
-    return 'login';
-});
 </script>
 
 
@@ -91,14 +81,7 @@ const buttonText = computed(() => {
                     </label>
                 </UFormGroup>
             </div>
-            <Transition name="scale-y" mode="out-in">
-                <div v-if="message" class="my-4 text-sm text-green-500">
-                    {{ message }}
-                </div>
-            </Transition>
-            <Transition name="scale-y" mode="out-in">
-                <div v-if="errorMessage" class="my-4 text-sm text-red-500">{{ errorMessage }}</div>
-            </Transition>
+
             <button type="submit" class="flex items-center justify-center gap-4 mt-4 text-lg">
                 <VueLoadingIcon v-if="loading" stroke="4" size="16" color="#fff" />
                 <span>Login</span>
