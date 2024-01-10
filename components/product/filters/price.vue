@@ -4,7 +4,7 @@ const { getFilter, setFilter, applyFilter, isFiltersActive } = await useFilterin
 const { removeBodyClass } = useHelpers()
 const isOpen = ref(false)
 const minValue = ref(0)
-const maxValue = ref(10000)
+const maxValue = ref(100000)
 const categoryFilterValue = ref(computed(() => {
     return getFilter('category');
 }));
@@ -36,7 +36,7 @@ const handleFilter = () => {
                     <label for="price-from" class="leading-none px-2 text-gray-400 absolute">$</label>
                 </div>
                 <div class="p-1">
-                    <URange v-model="price[0]" :min="0" :max="500" name="range" @change="handleFilter" />
+                    <URange v-model="price[0]" :min="0" :max="500" :step="100" name="range" @change="handleFilter" />
                 </div>
 
 
@@ -48,7 +48,7 @@ const handleFilter = () => {
                     <label for="price-to" class="leading-none px-2 text-gray-400 absolute">$</label>
                 </div>
                 <div class="p-1">
-                    <URange v-model="price[1]" name="range" :min="500" :max="100000" @change="handleFilter" />
+                    <URange v-model="price[1]" name="range" :min="500" :max="100000" :step="100" @change="handleFilter" />
                 </div>
             </div>
         </Transition>

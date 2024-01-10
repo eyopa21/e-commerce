@@ -10,11 +10,11 @@ onMounted(async () => {
   try {
     const res = await myAuth()
     console.log("tokichaw", res)
-    layout.value.showAlert = { error: false, message: res }
+    //layout.value.showAlert = { error: false, message: res }
     loading.value = false;
   } catch (err) {
     console.log("tokierror", err)
-    layout.value.showAlert = { error: true, message: err.message }
+    //layout.value.showAlert = { error: true, message: err.message }
     loading.value = false;
   }
 })
