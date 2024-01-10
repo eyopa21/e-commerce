@@ -43,7 +43,8 @@ if (error.value) {
     <div v-else class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-25">
       <VueLoadingIcon />
     </div>
-    <transition enter-from-class="translate-x-[20px] opacity-0" leave-to-class="translate-x-[20px] opacity-0"
+
+    <transition enter-from-class="translate-x-[200px] opacity-0" leave-to-class="translate-x-[200px] opacity-0"
       enter-active-class="transition-all duration-[0.3s] ease-out" leave-active-class="transition-all duration-[0.8s]">
       <VueToast v-if="layout.showAlert.message !== ''" />
     </transition>

@@ -8,29 +8,11 @@ export function useCart() {
   const currentUser = useCurrentUser();
   const loading = useState("cartLoading", () => false);
   //const { result, error, execute } =  useLazyAsyncQuery(query, {user_id: currentUser.value.id});
-   const { load,refetch, error, loadin } =  useLazyQuery(query, { user_id: currentUser.value.id }, { fetchPolicy: 'no-cache' })
+   const { load, refetch, error, loadin } = useLazyQuery(query, { user_id: currentUser.value.id }, { fetchPolicy: 'no-cache' })
+
+  const totalSum  = ref(0)
+  
   async function getCart() {
-    /*
-    const {
-      onResult,
-      onError,
-      loading: loadin,
-      refetch,
-    } = useQuery(query, { user_id: currentUser.value.id });
-    nuxtApp.provide("cartRefetch", () => {
-      console.log("refteching");
-      refetch();
-    });
-    loading.value = loadin;
-    onResult((res) => {
-      console.log("res", res.data?.carts);
-      currentUser.value.cart = res.data?.carts;
-      return res.data?.carts;
-    });
-    onError((err) => {
-      throw new Error("Cannot fetch cart");
-    });
-    */
    
 
     loading.value = loadin;
@@ -40,8 +22,11 @@ export function useCart() {
      
       throw new Error("Cannot fetch cart");
     } else {
-
       
+       result?.carts?.forEach(item => {
+        // console.log("itemmm", item.quantity*item.product.price)
+         totalSum.value+=item.quantity*item.product.price
+      })
    
       currentUser.value.cart = result?.carts;
       return result?.carts;
@@ -84,14 +69,16 @@ export function useCart() {
     try {
       await AddToCart({user_id: currentUser.value.id, product_id: productID, quantity: quantity})
       await getCart()
+       layout.value.showAlert = {error: false, message: "Product added to Cart"}
     } catch (err) {
       console.log("reomve error", err)
-      
+      layout.value.showAlert = {error: true, message: "Cannot add to cart"}
       throw new Error("Cannot add to cart");
     }
   }
 
   return {
+    totalSum,
     addToCart,
     removeItem,
     clearCart,

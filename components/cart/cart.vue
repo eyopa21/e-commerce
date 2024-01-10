@@ -1,12 +1,11 @@
 <script setup>
 const isLoggedIn = useCookie('isLoggedIn');
 const layout = useLayout();
-const { clearCart, getCart, loading } = useCart()
+const { clearCart, getCart, loading, totalSum } = useCart()
 const currentUser = useCurrentUser();
 const cartItem = ref(computed(() => {
     return currentUser.value.cart
 }))
-
 
 
 try {
@@ -56,7 +55,7 @@ try {
                 class="block p-3 text-lg text-center text-white bg-gray-800 rounded-lg shadow-md justify-evenly hover:bg-gray-900"
                 to="/checkout">
                 <span class="mx-2">Checkout</span>
-                <span>22$</span>
+                <span>{{ totalSum }}$</span>
             </NuxtLink>
         </div>
 
