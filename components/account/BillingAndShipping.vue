@@ -7,7 +7,7 @@ const currentUser = useCurrentUser();
 const route = useRoute();
 const buttonText = computed(() => (loading.value ? 'Updating...' : 'Update Details'));
 const shipToDifferent = ref(false)
-const { company_name, country, city, sub_city, address1, address2, kebele, zip_code } = route.name === 'checkoute' ? '' : currentUser.value.currentUser.billing_and_shipping_addresses[0]
+const { company_name, country, city, sub_city, address1, address2, kebele, zip_code } = currentUser.value.currentUser.billing_and_shipping_addresses[0]
 const State = ref({
   company_name,
   country,

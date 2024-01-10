@@ -1,0 +1,19 @@
+mutation (
+  $payment_method: String!
+  $products: jsonb!
+  $subtotal: numeric!
+  $user_id: uuid!
+  $billing_id: uuid!
+  $note: String
+) {
+  Order(
+    payment_method: $payment_method
+    products: $products
+    subtotal: $subtotal
+    user_id: $user_id
+    billing_id: $billing_id
+    note: $billing_id
+  ) {
+    id
+  }
+}

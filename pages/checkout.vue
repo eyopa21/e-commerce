@@ -1,4 +1,8 @@
 <script setup>
+import order_query from '../queries/insert/order.gql'
+const { getCart, totalSum } = useCart()
+const currentUser = useCurrentUser();
+const { mutate: Order, onDone, onError, loading } = useMutation(order_query)
 const layout = useLayout();
 const billing = ref('')
 const orderData = ref({
@@ -10,6 +14,13 @@ const order = () => {
   if (orderData.value.payment) {
     console.log("order", orderData.value, billing.value)
 
+    Order({ payment_method: orderData.value.payment, products: [{ "id": 1, "name": "shoes", "price": 1000 }, { "id": 123, "name": "bag", "price": 1000 }], subtotal: totalSum.value, user_id: currentUser.value.id, note: orderData.value.note, billing_id: currentUser.value.currentUser.billing_and_shipping_addresses[0]?.id })
+    onDone(res => {
+      console.log("res", res)
+    })
+    onError(err => {
+      console.log("errrr", err)
+    })
   } else {
     layout.value.showAlert = { error: true, message: "PLease select a payment method" }
   }
@@ -50,7 +61,7 @@ const order = () => {
           <button @click="order()" type="submit"
             class="flex items-center justify-center w-full gap-3 p-3 mt-4 font-semibold text-center text-white rounded-lg shadow-md bg-primary hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-50">
             Proceed To Order
-            <LoadingIcon v-if="isProcessingOrder" color="#fff" size="18" />
+            <LoadingIcon v-if="loading" color="#fff" size="18" :class="{ 'cursor-wait ': loading }" />
           </button>
         </OrderSummary>
       </form>
