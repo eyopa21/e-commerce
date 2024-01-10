@@ -14,7 +14,7 @@ const route = useRoute()
                 </span>
                 <NuxtLink to="/">
 
-                    <h3 class="md:w-[160px] pl-2"><img src="/public/gebeya.png" alt="logo" class="h-12 w-24 rounded-lg">
+                    <h3 class="md:w-[160px] pl-2"><img src="/gebeya.png" alt="logo" class="h-12 w-24 rounded-lg">
                     </h3>
                 </NuxtLink>
             </div>

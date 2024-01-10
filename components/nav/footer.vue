@@ -4,7 +4,7 @@
         <footer class="bg-white p-2">
             <div class="container flex flex-wrap justify-between gap-12 my-24 md:gap-24">
                 <div class="mr-auto">
-                    <span><img src="/public/gebeya.png" alt="logo" class="w-48 h-24 rounded-lg"></span>
+                    <span><img src="/gebeya.png" alt="logo" class="w-48 h-24 rounded-lg"></span>
                     <p class="mt-4 text-sm text-gray-700 xl:max-w-md">
                         Job Commerce is unmatched when it comes to performance and scalability. Reap the benefits of
                         having

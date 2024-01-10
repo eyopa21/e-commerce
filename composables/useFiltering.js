@@ -77,6 +77,7 @@ export function useFiltering() {
   async function applyFilter(categoryValue, priceValue) {
     try {
       if (!categoryValue?.length) setFilter("category", []);
+       if (!priceValue?.length) setFilter("price", []);
       if (categoryValue?.length) setFilter("category", categoryValue);
       if (priceValue?.length) setFilter("price", priceValue);
 

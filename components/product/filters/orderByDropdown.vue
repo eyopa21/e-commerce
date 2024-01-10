@@ -8,7 +8,7 @@ const menus = ['Latest', 'Alphabetically', 'Price']
 const selected = ref(menus[0])
 
 const Sort = (value) => {
-    removeBodyClass();
+    removeBodyClass('show-filters');
     sort(value, order.value)
 }
 </script>
@@ -26,7 +26,7 @@ const Sort = (value) => {
             </button>
         </div>
         <USelectMenu v-slot="{ open }" v-model="selected" :options="menus" @change="Sort(selected)"
-            class="w-full md:w-48 font-normal z-30">
+            class="w-full md:w-48 font-normal z-50">
             <UButton color="gray" class="flex-1 justify-between py-2 rounded-l-none text-normal">
                 {{ selected }}
 
