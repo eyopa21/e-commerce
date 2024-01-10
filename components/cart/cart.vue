@@ -46,6 +46,7 @@ try {
         <div class="mt-8 text-center">Cart</div>
 
         <ul v-if="cartItem?.length" class="flex flex-col flex-1 gap-4 p-6 overflow-y-scroll md:p-8">
+
             <div v-for="(i, key) in cartItem" :key="key">
                 <CartCard :item="i" />
             </div>

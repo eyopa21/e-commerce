@@ -2,6 +2,7 @@
 <script setup>
 import { LoginValidationSchema } from '../../zod/LoginSchema'
 import login_query from '../queries/auth/login.gql'
+const layout = useLayout();
 const { onLogin, onLogout, getToken } = useApollo()
 const { mutate: Login, onDone, onError, loading } = useMutation(login_query)
 const { myAuth } = useAuth()

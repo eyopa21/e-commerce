@@ -15,8 +15,6 @@ const Sort = (value) => {
 
 <template>
     <div class="flex">
-
-
         <div class="inline-flex ml-auto -space-x-px shadow-sm rounded-m isolate">
             <button
                 class="relative inline-flex items-center p-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50 focus:z-20"
@@ -26,7 +24,7 @@ const Sort = (value) => {
             </button>
         </div>
         <USelectMenu v-slot="{ open }" v-model="selected" :options="menus" @change="Sort(selected)"
-            class="w-full md:w-48 font-normal z-50">
+            class="w-full md:w-48 font-normal z-50 md:z-10">
             <UButton color="gray" class="flex-1 justify-between py-2 rounded-l-none text-normal">
                 {{ selected }}
 
