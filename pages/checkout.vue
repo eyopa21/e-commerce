@@ -1,4 +1,19 @@
 <script setup>
+const layout = useLayout();
+const billing = ref('')
+const orderData = ref({
+
+  payment: '',
+  note: ''
+})
+const order = () => {
+  if (orderData.value.payment) {
+    console.log("order", orderData.value, billing.value)
+
+  } else {
+    layout.value.showAlert = { error: true, message: "PLease select a payment method" }
+  }
+}
 
 </script>
 
@@ -16,20 +31,23 @@
 
 
           <div>
-            <h2 class="w-full mb-3 text-2xl font-semibold">Shipping detail</h2>
-            <VueBillingDetails />
-          </div>
 
+            <AccountBillingAndShipping @checkout="n => billing = n" />
+          </div>
+          <div>
+            <h2 class="mb-4 text-xl font-semibold">Payment options</h2>
+            <OrderPaymentOptions class="mb-4" @payment="n => orderData.payment = n" />
+          </div>
 
           <div>
             <h2 class="mb-4 text-xl font-semibold">Order note(Optional)</h2>
-            <textarea id="order-note" name="order-note" class="w-full" rows="4"
+            <textarea v-model="orderData.note" id="order-note" name="order-note" class="w-full" rows="4"
               placeholder="orderNotePlaceholder"></textarea>
           </div>
         </div>
 
         <OrderSummary>
-          <button
+          <button @click="order()" type="submit"
             class="flex items-center justify-center w-full gap-3 p-3 mt-4 font-semibold text-center text-white rounded-lg shadow-md bg-primary hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-50">
             Proceed To Order
             <LoadingIcon v-if="isProcessingOrder" color="#fff" size="18" />

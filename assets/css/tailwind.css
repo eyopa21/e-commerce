@@ -153,3 +153,8 @@ select {
     animation-name: fadeOut;
     animation-duration: 200ms;
 }
+
+
+input {
+    @apply focus:ring-1 ring-primary
+}
