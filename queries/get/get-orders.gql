@@ -1,0 +1,15 @@
+query myQuery($user_id: uuid!) {
+  orders(where: { user_id: { _eq: $user_id } }) {
+    id
+    note
+    payment_method
+    products
+    shipping
+    status
+    subtotal
+    tax
+    total
+    updated_at
+    created_at
+  }
+}

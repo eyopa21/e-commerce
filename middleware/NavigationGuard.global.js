@@ -25,6 +25,9 @@ export default defineNuxtRouteMiddleware((to, from) => {
     if ((  to.name === 'auth-verify') & (is_verified.value)) {
         return navigateTo('/')
     }
+    if ((  to.name === 'checkout') & (!currentUser.value.cart)) {
+        return navigateTo('/')
+    }
     
     /*
     if (from.name === 'auth-verify' && !is_verified.value) {

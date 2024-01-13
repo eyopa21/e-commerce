@@ -25,7 +25,7 @@ export default defineNuxtConfig({
   },
   image: {
     format: ['avif', 'webp'],
-    quality: 80,
+    quality: 30,
     cloudinary: {
       baseURL: 'https://res.cloudinary.com/doifglnsi/image/upload'
     }

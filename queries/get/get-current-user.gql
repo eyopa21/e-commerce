@@ -1,4 +1,4 @@
-query myQuery($id: uuid!){
+query myQuery($id: uuid!) {
   users_by_pk(id: $id) {
     id
     user_name
@@ -9,7 +9,7 @@ query myQuery($id: uuid!){
     phone_number
     created_at
     updated_at
-    billing_and_shipping_addresses {
+    billing_and_shipping_addresses(where: { original: { _eq: true } }) {
       id
       country
       city

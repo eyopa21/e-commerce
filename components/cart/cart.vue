@@ -1,6 +1,7 @@
 <script setup>
 const isLoggedIn = useCookie('isLoggedIn');
 const layout = useLayout();
+const router = useRouter();
 const { clearCart, getCart, loading, totalSum } = useCart()
 const currentUser = useCurrentUser();
 const cartItem = ref(computed(() => {
@@ -12,6 +13,11 @@ try {
     await getCart()
 } catch (err) {
     console.log("cart erorororo", err)
+}
+
+const toCheckout = () => {
+    router.push('/checkout');
+    layout.value.showCart = false
 }
 
 </script>
@@ -51,9 +57,8 @@ try {
             </div>
         </ul>
         <div v-if="cartItem?.length" class="px-8 mb-8">
-            <NuxtLink
-                class="block p-3 text-lg text-center text-white bg-gray-800 rounded-lg shadow-md justify-evenly hover:bg-gray-900"
-                to="/checkout">
+            <NuxtLink @click="toCheckout()"
+                class="block p-3 text-lg text-center text-white bg-gray-800 rounded-lg shadow-md justify-evenly hover:bg-gray-900">
                 <span class="mx-2">Checkout</span>
                 <span>{{ totalSum }}$</span>
             </NuxtLink>

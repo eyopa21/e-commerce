@@ -4,10 +4,11 @@ import { BillingValidationSchema } from '~/zod/BillingSchema ';
 const emit = defineEmits(['checkout'])
 const { mutate: Update, onDone, onError, loading } = useMutation(update_query)
 const currentUser = useCurrentUser();
+const layout = useLayout();
 const route = useRoute();
 const buttonText = computed(() => (loading.value ? 'Updating...' : 'Update Details'));
-const shipToDifferent = ref(false)
-const { company_name, country, city, sub_city, address1, address2, kebele, zip_code } = currentUser.value.currentUser.billing_and_shipping_addresses[0]
+const shipToDifferent = ref(route.name === 'checkout' ? false : true)
+const { company_name, country, city, sub_city, address1, address2, kebele, zip_code } = currentUser.value.currentUser.billing_and_shipping_addresses[0] || []
 const State = ref({
   company_name,
   country,
@@ -44,6 +45,7 @@ async function saveChanges() {
     })
     onError(err => {
       console.log(err)
+      layout.value.showAlert = { error: true, message: 'Updating not successfull, please try again' }
     })
   }
 

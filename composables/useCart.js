@@ -40,7 +40,9 @@ export function useCart() {
 
     try {
       await DeleteCart({ user_id: currentUser.value.id });
+      
       await getCart()
+      totalSum.value = 0
     } catch (err) {
       console.log(err);
       

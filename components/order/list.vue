@@ -1,8 +1,16 @@
 <script setup>
+import order_query from '../../queries/get/get-orders.gql'
 const router = useRouter();
+const currentUser = useCurrentUser();
 const { formatDate, scrollToTop } = useHelpers();
-
-
+const orders = reactive([])
+const { onResult, onError, loading } = useQuery(order_query, { user_id: currentUser.value.id })
+onResult(res => {
+  console.log(res.data)
+})
+onError(err => {
+  console.log(err)
+})
 
 
 const refresh = () => {
@@ -15,12 +23,7 @@ const goToOrder = (orderNumber) => {
   router.push(`/order-summary/${orderNumber}`);
 };
 
-const orders = reactive([{
-  orderNumber: 11234,
-  date: '11/2/33',
-  status: 'PENDING',
-  total: 345
-}])
+
 </script>
 
 <template>
