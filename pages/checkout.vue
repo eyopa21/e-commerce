@@ -1,8 +1,10 @@
 <script setup>
 import order_query from '../queries/insert/order.gql'
+import add_billing_query from '../queries/insert/add-billing-address.gql'
 const { getCart, totalSum } = useCart()
 const currentUser = useCurrentUser();
 const { mutate: Order, onDone, onError, loading } = useMutation(order_query)
+const { mutate: ShipToDiffrent, onDone: onShipDone, onError: onShipError, loading: shipLoading } = useMutation(add_billing_query)
 const layout = useLayout();
 const billing = ref('')
 const orderData = ref({
@@ -10,11 +12,23 @@ const orderData = ref({
   payment: '',
   note: ''
 })
-const order = () => {
-  if (orderData.value.payment) {
-    console.log("order", orderData.value, billing.value)
 
-    Order({ payment_method: orderData.value.payment, products: [{ "id": 1, "name": "shoes", "price": 1000 }, { "id": 123, "name": "bag", "price": 1000 }], subtotal: totalSum.value, user_id: currentUser.value.id, note: orderData.value.note, billing_id: currentUser.value.currentUser.billing_and_shipping_addresses[0]?.id })
+
+
+const order = () => {
+
+  if (orderData.value.payment) {
+
+    console.log("order", orderData.value, billing.value)
+    ShipToDiffrent({ user_id: currentUser.value.id, address1: billing.value.address1, address2: billing.value.address2, city: billing.value.city, country: billing.value.country, subcity: billing.value.sub_city, kebele: billing.value.kebele, company_name: billing.value.company_name, zip_code: billing.value.zip_code })
+    onShipDone((res) => {
+      console.log("ship res", res)
+      Order({ payment_method: orderData.value.payment, products: currentUser.value.cart, subtotal: totalSum.value, user_id: currentUser.value.id, note: orderData.value.note, billing_id: res.data?.insert_billing_and_shipping_addresses_one?.id })
+    })
+    onShipError(err => {
+      console.log("ship error", orderData.value.payment, err)
+    })
+
     onDone(res => {
       console.log("res", res)
     })
@@ -42,7 +56,7 @@ const order = () => {
 
 
           <div>
-
+            cartproduct {{ cartProduct }}
             <AccountBillingAndShipping @checkout="n => billing = n" />
           </div>
           <div>

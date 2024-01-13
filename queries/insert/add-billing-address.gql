@@ -1,0 +1,27 @@
+mutation (
+  $address1: String!
+  $address2: String
+  $company_name: String
+  $country: String!
+  $city: String!
+  $kebele: String!
+  $subcity: String!
+  $user_id: uuid!
+  $zip_code: Int!
+) {
+  insert_billing_and_shipping_addresses_one(
+    object: {
+      address1: $address1
+      address2: $address2
+      company_name: $company_name
+      country: $country
+      kebele: $kebele
+      sub_city: $subcity
+      user_id: $user_id
+      zip_code: $zip_code
+      city: $city
+    }
+  ) {
+    id
+  }
+}
