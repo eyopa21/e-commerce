@@ -45,7 +45,8 @@ const goToOrder = (orderNumber) => {
         </thead>
         <tbody>
 
-          <tr v-for="(order, key) in orders" :key="key" class="cursor-pointer hover:underline">
+          <tr @click="goToOrder(order.id)" v-for="(order, key) in orders" :key="key"
+            class="cursor-pointer hover:underline">
 
 
 
