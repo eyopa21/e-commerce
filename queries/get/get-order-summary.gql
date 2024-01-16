@@ -1,0 +1,15 @@
+query myQuery($id: Int!) {
+  orders(where: { id: { _eq: $id } }) {
+    id
+    note
+    payment_method
+    products
+    shipping
+    status
+    subtotal
+    tax
+    total
+    updated_at
+    created_at
+  }
+}

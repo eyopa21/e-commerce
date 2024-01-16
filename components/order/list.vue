@@ -6,7 +6,7 @@ const layout = useLayout();
 const { formatDate, scrollToTop } = useHelpers();
 const orders = ref([])
 const isOpen = ref(false)
-const { onResult, onError, loading } = useQuery(order_query, { user_id: "ced96abb-2cf9-4b71-b697-1a51e3dc1951" })
+const { onResult, onError, loading } = useQuery(order_query, { user_id: currentUser.value.id })
 onResult(res => {
   console.log(res.data)
   orders.value = res.data?.orders
@@ -27,7 +27,12 @@ const goToOrder = (orderNumber) => {
   router.push(`/order-summary/${orderNumber}`);
 };
 
+const isEmpty = ref(computed(() => {
+  if (loading.value) return false
+  if (orders.value?.length) return false
 
+  return true
+}))
 </script>
 
 <template>
@@ -88,15 +93,16 @@ const goToOrder = (orderNumber) => {
           </tr>
         </tbody>
       </table>
-      <div class="text-center flex justify-center w-full mt-8">
+      <!--div class="text-center flex justify-center w-full mt-8">
         <button type="button" @click="refresh"
           class="flex items-center gap-1 text-sm leading-none hover:bg-gray-50 p-2 rounded">
           <span>Reresh list</span>
           <Icon name="ion:refresh-outline" />
         </button>
-      </div>
+      </!--div-->
     </div>
-    <div v-else class="min-h-[250px] flex items-center justify-center text-gray-500 text-lg">No orders found.</div>
+    <div v-if="isEmpty" class="min-h-[250px] flex items-center justify-center text-gray-500 text-lg">No orders found.
+    </div>
     <VueLoadingIcon v-if="loading" size="24" stroke="2" />
   </div>
 </template>
