@@ -4,7 +4,7 @@ const { formatDate } = useHelpers();
 const route = useRoute();
 const order = ref('')
 const layout = useLayout();
-const { onResult, onError, loading } = useQuery(order_query, { id: route.params.id })
+const { onResult, onError, loading } = useQuery(order_query, { id: route.params.id }, { fetchPolicy: "no-cache" })
 onResult(res => {
   console.log(res.data)
   order.value = res.data?.orders[0]
@@ -80,7 +80,7 @@ const isEmpty = ref(computed(() => {
         </div>
         <div class="flex justify-between">
           <span>tax</span>
-          <span>15%</span>
+          <span>15%({{ order.tax }})</span>
         </div>
         <div class="flex justify-between">
           <span>Shipping</span>
@@ -93,7 +93,9 @@ const isEmpty = ref(computed(() => {
         </div>
       </div>
     </div>
+    <div class="w-full ">
 
-    <VueLoadingIcon v-if="loading" />
+      <VueLoadingIcon v-if="loading" />
+    </div>
   </div>
 </template>

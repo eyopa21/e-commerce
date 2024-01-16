@@ -6,7 +6,7 @@ const layout = useLayout();
 const { formatDate, scrollToTop } = useHelpers();
 const orders = ref([])
 const isOpen = ref(false)
-const { onResult, onError, loading } = useQuery(order_query, { user_id: currentUser.value.id })
+const { onResult, onError, loading, refetch } = useQuery(order_query, { user_id: currentUser.value.id })
 onResult(res => {
   console.log(res.data)
   orders.value = res.data?.orders
@@ -37,8 +37,9 @@ const isEmpty = ref(computed(() => {
 
 <template>
   <div class="bg-white rounded-lg flex shadow min-h-[250px] p-12 justify-center items-center">
-    <div v-if="orders?.length" class="w-full">
-      <table class="w-full text-left table-auto" aria-label="Order List">
+    <div class="w-full">
+      <VueLoadingIcon v-if="loading" size="24" stroke="2" />
+      <table v-if="!loading && orders?.length" class="w-full text-left table-auto" aria-label="Order List">
         <thead>
 
           <tr>
@@ -93,17 +94,18 @@ const isEmpty = ref(computed(() => {
           </tr>
         </tbody>
       </table>
-      <!--div class="text-center flex justify-center w-full mt-8">
-        <button type="button" @click="refresh"
+      <div v-if="!loading" class="text-center flex justify-center w-full mt-8">
+        <button type="button" @click="refetch"
           class="flex items-center gap-1 text-sm leading-none hover:bg-gray-50 p-2 rounded">
           <span>Reresh list</span>
           <Icon name="ion:refresh-outline" />
         </button>
-      </!--div-->
+      </div>
     </div>
+
     <div v-if="isEmpty" class="min-h-[250px] flex items-center justify-center text-gray-500 text-lg">No orders found.
     </div>
-    <VueLoadingIcon v-if="loading" size="24" stroke="2" />
+
   </div>
 </template>
 

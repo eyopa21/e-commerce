@@ -29,10 +29,12 @@ if (error.value) {
   mainData.value.agg = data.value?.products[0].total_count
 
 }
+const height = ref(5)
 </script>
 
 <template>
   <ClientOnly>
+    <NuxtLoadingIndicator :height="5" color="orange" />
     <div v-if="!loading" class="flex flex-col min-h-screen mx-2">
       <NuxtLayout>
 
