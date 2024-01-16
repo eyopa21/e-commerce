@@ -37,8 +37,12 @@ const isEmpty = ref(computed(() => {
 
 <template>
   <div class="bg-white rounded-lg flex shadow min-h-[250px] p-12 justify-center items-center">
+
+
     <div class="w-full">
-      <VueLoadingIcon v-if="loading" size="24" stroke="2" />
+      <div class="flex justify-center">
+        <VueLoadingIcon v-if="loading" size="24" stroke="2" />
+      </div>
       <table v-if="!loading && orders?.length" class="w-full text-left table-auto" aria-label="Order List">
         <thead>
 
@@ -94,6 +98,7 @@ const isEmpty = ref(computed(() => {
           </tr>
         </tbody>
       </table>
+
       <div v-if="!loading" class="text-center flex justify-center w-full mt-8">
         <button type="button" @click="refetch"
           class="flex items-center gap-1 text-sm leading-none hover:bg-gray-50 p-2 rounded">
@@ -103,9 +108,9 @@ const isEmpty = ref(computed(() => {
       </div>
     </div>
 
+
     <div v-if="isEmpty" class="min-h-[250px] flex items-center justify-center text-gray-500 text-lg">No orders found.
     </div>
-
   </div>
 </template>
 

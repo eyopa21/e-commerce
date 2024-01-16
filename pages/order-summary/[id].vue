@@ -93,9 +93,8 @@ const isEmpty = ref(computed(() => {
         </div>
       </div>
     </div>
-    <div class="w-full ">
 
-      <VueLoadingIcon v-if="loading" />
-    </div>
+    <VueLoadingIcon v-if="loading" />
+
   </div>
 </template>
