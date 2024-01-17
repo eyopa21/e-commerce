@@ -1,6 +1,5 @@
-mutation($id: uuid!, $code: String!) {
-  verify(id: $id, code: $code) {
+mutation ($code: String!, $user_id: uuid!) {
+  Verify(code: $code, id: $user_id) {
     id
-    is_verified
   }
 }

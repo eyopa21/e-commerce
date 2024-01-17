@@ -27,7 +27,7 @@ const register = async () => {
         try {
             const res = await myAuth()
             layout.value.showAlert = { error: false, message: "Login success" }
-            router.push('/')
+
         } catch (err) {
             onLogout()
             console.log(err, "err")
