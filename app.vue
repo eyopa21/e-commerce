@@ -33,7 +33,7 @@ const height = ref(5)
 </script>
 
 <template>
-  <div>
+  <ClientOnly>
     <NuxtLoadingIndicator :height="5" color="orange" />
     <div v-if="!loading" class="flex flex-col min-h-screen mx-2">
       <NuxtLayout>
@@ -50,7 +50,7 @@ const height = ref(5)
       enter-active-class="transition-all duration-[0.3s] ease-out" leave-active-class="transition-all duration-[0.8s]">
       <VueToast v-if="layout.showAlert.message !== ''" />
     </transition>
-  </div>
+  </ClientOnly>
 </template>
 
 <style>
