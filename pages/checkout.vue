@@ -28,7 +28,7 @@ const order = () => {
     })
     onShipError(err => {
       console.log("ship error", orderData.value.payment, err)
-      layout.value.showAlert = { error: true, message: 'Order not successfull, please try again' }
+      layout.value.showAlert = { error: true, message: 'Shipping detail error' }
     })
 
     onDone(res => {

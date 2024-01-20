@@ -38,8 +38,10 @@ const isEmpty = ref(computed(() => {
 <template>
   <div class="bg-white rounded-lg flex shadow min-h-[250px] p-12 justify-center items-center">
 
-
     <div class="w-full">
+      <div v-if="isEmpty" class="min-h-[250px] flex items-center justify-center text-gray-500 text-lg">No orders found.
+      </div>
+
       <div class="flex justify-center">
         <VueLoadingIcon v-if="loading" size="24" stroke="2" />
       </div>
@@ -109,8 +111,7 @@ const isEmpty = ref(computed(() => {
     </div>
 
 
-    <div v-if="isEmpty" class="min-h-[250px] flex items-center justify-center text-gray-500 text-lg">No orders found.
-    </div>
+
   </div>
 </template>
 

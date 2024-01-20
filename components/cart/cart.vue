@@ -58,7 +58,7 @@ const toCheckout = () => {
         </ul>
         <div v-if="cartItem?.length" class="px-8 mb-8">
             <NuxtLink @click="toCheckout()"
-                class="block p-3 text-lg text-center text-white bg-gray-800 rounded-lg shadow-md justify-evenly hover:bg-gray-900">
+                class="block p-3 text-lg text-center cursor-pointer text-white bg-gray-800 rounded-lg shadow-md justify-evenly hover:bg-gray-900">
                 <span class="mx-2">Checkout</span>
                 <span>{{ totalSum }}$</span>
             </NuxtLink>
